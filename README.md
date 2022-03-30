@@ -1,1 +1,6 @@
 # Lukuvinkkikirjasto
+
+## Asennusohjeet
+```
+$ poetry install
+```
