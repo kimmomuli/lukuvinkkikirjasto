@@ -20,4 +20,4 @@ def tallenna_kirjavinkki(kirjavinkki: Kirjavinkki):
     sql2 = "INSERT INTO kirjat (otsikko,kirjailija,kirjoitusvuosi) VALUES (:otsikko, :kirjailija, :kirjoitusvuosi)"
     database.session.execute(sql2, {"otsikko": kirjavinkki.otsikko,
                              "kirjailija": kirjavinkki.kirjailija, "kirjoitusvuosi": kirjavinkki.kirjoitusvuosi})
-    database.commit()
+    database.session.commit()
