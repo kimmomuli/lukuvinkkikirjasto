@@ -1,10 +1,8 @@
 #
-class kirjavinkki:
-    def __init__(self, otsikko,kirjailija = "tuntematon",kirjoitusvuosi = "1981", omistaja = "käyttäjä"):
-        self.otsikko = otsikko
-        self.kirjailija = kirjailija
-        self.kirjoitusvuosi = kirjoitusvuosi
-        self.omistaja = omistaja
-        self.tyyppi = "kirja"
-        
-    
+class Kirjavinkki:
+    def __init__(self, otsikko: str, kirjailija: str = "tuntematon", kirjoitusvuosi: int = 1981, omistaja: str = ""):
+        self.otsikko: str = otsikko
+        self.kirjailija: str = kirjailija
+        self.kirjoitusvuosi: int = kirjoitusvuosi
+        self.omistaja: str = omistaja
+        self.tyyppi: str = "kirja"
