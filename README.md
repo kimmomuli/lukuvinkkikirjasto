@@ -21,12 +21,8 @@
     ```
 
 ## Projektin ajaminen
-1. Joko poetry shellistä
-    ```
-    $ poetry shell
-    $ flask run
-    ```
-2. Tai muuten
-    ```
-    $ poetry run flask run
-    ```
+```
+$ poetry shell
+$ cd src
+$ flask run
+```

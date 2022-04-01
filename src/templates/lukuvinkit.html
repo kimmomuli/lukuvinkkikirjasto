@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}Lukuvinkit{% endblock %}
+{% block content %}
+
+<h1>Lukuvinkit</h1>
+
+{% for vinkki in vinkit %}
+<hr />
+<div>
+    <h4>{{vinkki.otsikko}}</h4>
+    {% if vinkki.tyyppi == "kirja" %}
+    <table>
+        <tbody>
+            <tr>
+                <td>Kirjailija</td>
+                <td>{{vinkki.kirjailija}}</td>
+            </tr>
+            <tr>
+                <td>kirjoitusvuosi</td>
+                <td>{{vinkki.kirjoitusvuosi}}</td>
+            </tr>
+            <tr>
+                <td>omistaja</td>
+                <td>{{vinkki.omistaja}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% if vinkit | length > 0 %}
+<hr />
+{% endif %}
+
+{% endblock %}

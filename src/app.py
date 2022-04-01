@@ -5,5 +5,5 @@ app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# from src.views import ...
-# app.register_blueprint(...)
+from views import lukuvinkit
+app.register_blueprint(lukuvinkit.lukuvinkit_bp)
