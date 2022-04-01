@@ -22,9 +22,7 @@
 
 ## Projektin ajaminen
 ```
-$ poetry shell
-$ cd src
-$ flask run
+$ poetry run invoke start
 ```
 
 ## Testien ajaminen
@@ -33,7 +31,7 @@ $ flask run
     DATABASE_URL=<postgresql:///testi_tietokannan_nimi>
     ```
     Missä `<postgresql:///testi_tietokannan_nimi>` on testeissä käytettävän tietokannan osoite.  
-2. Aja testit projektin juuressa
+2. Aja testit
     ```
-    $ pytest src
+    $ poetry run invoke test
     ```
