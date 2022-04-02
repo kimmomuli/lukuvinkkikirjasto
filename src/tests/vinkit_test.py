@@ -28,3 +28,10 @@ class TestVinkit(flask_testing.TestCase):
         repositories.vinkit.tallenna_kirjavinkki(anna)
         vinkit = repositories.vinkit.lataa_kirjat()
         self.assertEqual(len(vinkit), 2)
+
+    def test_kayttajan_tiedot_loytyvat_ladatulta_vinkilta(self):
+        gulag = Kirjavinkki("Gulag - vankileirien saaristo",
+                            "Aleksandr Solzhenitsyn", 1973, "Aleksi")
+        repositories.vinkit.tallenna_kirjavinkki(gulag)
+        vinkit = repositories.vinkit.lataa_kirjat()
+        self.assertEqual(vinkit[0].omistaja, gulag.omistaja)
