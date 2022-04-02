@@ -1,11 +1,17 @@
-import unittest
+import flask_testing
+from flask import Flask
 import repositories.vinkit
+from initialize_database import initialize_database
+from app import create_app
 from entities.kirjavinkki import Kirjavinkki
 
 
-class TestVinkit(unittest.TestCase):
+class TestVinkit(flask_testing.TestCase):
+    def create_app(self):
+        return create_app(testing=True)
+
     def setUp(self):
-        pass
+        initialize_database()
 
     def test_voi_tallettaa_kirjavinkin_ja_se_loytyy_kannasta(self):
         karamazov = Kirjavinkki(

@@ -22,7 +22,16 @@
 
 ## Projektin ajaminen
 ```
-$ poetry shell
-$ cd src
-$ flask run
+$ poetry run invoke start
 ```
+
+## Testien ajaminen
+1. Luo `.env.test` tiedosto projektin juureen ja lisää seuraa rivi sinne
+    ```
+    DATABASE_URL=<postgresql:///testi_tietokannan_nimi>
+    ```
+    Missä `<postgresql:///testi_tietokannan_nimi>` on testeissä käytettävän tietokannan osoite.  
+2. Aja testit
+    ```
+    $ poetry run invoke test
+    ```
