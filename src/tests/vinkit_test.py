@@ -21,4 +21,10 @@ class TestVinkit(flask_testing.TestCase):
         self.assertEqual(vinkit[0].otsikko, karamazov.otsikko)
 
     def test_voi_tallettaa_useita_kirjavinkkeja(self):
-        pass
+        karamazov = Kirjavinkki(
+            "Karamazovin veljekset - Bratja Karamazovy", "Fedor Dostojevski", 1880)
+        repositories.vinkit.tallenna_kirjavinkki(karamazov)
+        anna = Kirjavinkki("Anna Karenina", "Leo Tolstoi", 1878, "testaaja ")
+        repositories.vinkit.tallenna_kirjavinkki(anna)
+        vinkit = repositories.vinkit.lataa_kirjat()
+        self.assertEqual(len(vinkit), 2)
