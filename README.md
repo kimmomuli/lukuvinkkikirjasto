@@ -1,5 +1,7 @@
 # Lukuvinkkikirjasto
 
+![GitHub Action](https://github.com/kimmomuli/Lukuvinkkikirjasto/workflows/CI/badge.svg)
+
 ## Asennusohjeet
 1. Luo `.env` tiedosto projektin juureen ja lisää seuraavat rivit sinne
     ```
