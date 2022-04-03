@@ -1,6 +1,6 @@
+from typing import List
 from database import database
 from entities.kirjavinkki import Kirjavinkki
-from typing import List
 
 
 def lataa_kirjat() -> List[Kirjavinkki]:

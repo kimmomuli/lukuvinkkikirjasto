@@ -1,14 +1,8 @@
 from flask import render_template, Blueprint, redirect, request
-from entities.kirjavinkki import Kirjavinkki
 from repositories.vinkit import lataa_kirjat, tallenna_kirjavinkki
 from services.kirjavinkki_service import parse_kirjavinkki
 
 lukuvinkit_bp = Blueprint("lukuvinkit", __name__)
-
-vinkit = [
-    Kirjavinkki("testiotsikko", "testikirjailija", "1970", "testaaja"),
-    Kirjavinkki("testiotsikko2")
-]
 
 
 @lukuvinkit_bp.route("/")
@@ -31,7 +25,8 @@ def luo_vinkki():
         omistaja = request.form["omistaja"]
 
         kirjavinkki = parse_kirjavinkki(
-            otsikko, kirjailija, kirjoitusvuosi, omistaja)
+            otsikko, kirjailija, kirjoitusvuosi, omistaja
+        )
 
         tallenna_kirjavinkki(kirjavinkki)
         return redirect("/")
