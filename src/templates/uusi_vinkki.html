@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Luo lukuvinkki{% endblock %}
+{% block content %}
+
+<h1>Luo lukuvinkki</h1>
+
+<form action="/luo_vinkki" method="POST">
+    <p>
+        Otsikko: <br>
+        <input type="text" name="otsikko">
+    </p>
+    <p>
+        Kirjailija: <br>
+        <input type="text" name="kirjailija">
+    </p>
+    <p>
+        Kirjoitusvuosi: <br>
+        <input type="text" name="kirjoitusvuosi">
+    </p>
+    <p>
+        omistaja: <br>
+        <input type="text" name="omistaja">
+    </p>
+
+    <input type="submit" value="luo vinkki">
+</form>
+
+{% endblock %}

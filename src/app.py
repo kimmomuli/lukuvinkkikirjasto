@@ -1,6 +1,9 @@
 from os import getenv
 from flask import Flask
 from config import DATABASE_URL
+from database import database
+from views import lukuvinkit
+
 
 
 def create_app(testing: bool = False):
@@ -10,9 +13,7 @@ def create_app(testing: bool = False):
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config['TESTING'] = testing
 
-    from database import database
     database.init_app(app)
 
-    from views import lukuvinkit
     app.register_blueprint(lukuvinkit.lukuvinkit_bp)
     return app

@@ -1,8 +1,9 @@
 from database import database
 from entities.kirjavinkki import Kirjavinkki
+from typing import List
 
 
-def lataa_kirjat() -> list[Kirjavinkki]:
+def lataa_kirjat() -> List[Kirjavinkki]:
     sql = "SELECT a.otsikko, a.kirjailija, a.kirjoitusvuosi, b.tunnus FROM kirjat as a INNER JOIN vinkit as b ON a.otsikko = b.otsikko "
     tulos = database.session.execute(sql)
     vinkit = tulos.fetchall()

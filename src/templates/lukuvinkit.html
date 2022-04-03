@@ -3,11 +3,15 @@
 {% block content %}
 
 <h1>Lukuvinkit</h1>
+<hr>
+<a href="/uusi_vinkki">Luo uusi vinkki</a>
 
 {% for vinkki in vinkit %}
 <hr />
 <div>
     <h4>{{vinkki.otsikko}}</h4>
+
+
     {% if vinkki.tyyppi == "kirja" %}
     <table>
         <tbody>
