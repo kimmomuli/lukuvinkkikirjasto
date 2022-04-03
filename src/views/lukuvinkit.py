@@ -1,5 +1,7 @@
 from flask import render_template, Blueprint, redirect, request
 from entities.kirjavinkki import Kirjavinkki
+from repositories.vinkit import lataa_kirjat, tallenna_kirjavinkki
+from services.kirjavinkki_service import parse_kirjavinkki
 
 lukuvinkit_bp = Blueprint("lukuvinkit", __name__)
 
@@ -11,6 +13,7 @@ vinkit = [
 
 @lukuvinkit_bp.route("/")
 def lukuvinkit():
+    vinkit = lataa_kirjat()
     return render_template("lukuvinkit.html", vinkit=vinkit)
 
 
@@ -22,14 +25,15 @@ def uusi_vinkki():
 @lukuvinkit_bp.route("/luo_vinkki", methods=["POST"])
 def luo_vinkki():
     try:
-        otsikko = str(request.form["otsikko"])
-        kirjailija = str(request.form["kirjailija"])
-        kirjoitusvuosi = int(request.form["kirjoitusvuosi"])
-        omistaja = str(request.form["omistaja"])
+        otsikko = request.form["otsikko"]
+        kirjailija = request.form["kirjailija"]
+        kirjoitusvuosi = request.form["kirjoitusvuosi"]
+        omistaja = request.form["omistaja"]
 
-        vinkit.append(
-            Kirjavinkki(otsikko, kirjailija, kirjoitusvuosi, omistaja)
-        )
+        kirjavinkki = parse_kirjavinkki(
+            otsikko, kirjailija, kirjoitusvuosi, omistaja)
+
+        tallenna_kirjavinkki(kirjavinkki)
         return redirect("/")
     except:
         return render_template("virhe.html")
