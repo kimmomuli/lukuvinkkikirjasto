@@ -35,3 +35,16 @@ $ poetry run invoke start
     ```
     $ poetry run invoke test
     ```
+
+## User storyt ja niiden hyväksymiskriteerit
+[Product backlog ja sprint backlog](https://github.com/kimmomuli/Lukuvinkkikirjasto/projects/1)
+
+1. **Käyttäjä voi selata vinkkejä:** 
+    - Käyttäjä voi selata vinkkejä.
+    - Vinkit haetaan tietokannasta. 
+
+2. **Käyttäjä voi lisätä uuden kirjasuosituksen:** 
+    - Käyttäjä voi lisätä kirjasuosituksen, joka sisältää kirjan otsikon, kirjailijan ja julkaisuvuoden.
+    - Vinkki tallennetaan tietokantaan.
+    - Ohjelma varoittaa jos vinkin tiedot ovat väärän tyyppisiä.
+    - Ohjelma varoittaa jos kaksi eri käyttäjää haluaa lisätä saman kirjan. 
