@@ -36,6 +36,12 @@ $ poetry run invoke start
     $ poetry run invoke test
     ```
 
+## Pylint
+
+```
+poetry run invoke lint
+```
+
 ## User storyt ja niiden hyväksymiskriteerit
 [Product backlog ja sprint backlog](https://github.com/kimmomuli/Lukuvinkkikirjasto/projects/1)
 
