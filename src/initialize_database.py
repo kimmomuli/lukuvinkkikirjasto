@@ -8,7 +8,7 @@ def drop_tables():
 
 
 def create_tables():
-    with open("schema.sql", "r") as schema_file:
+    with open("schema.sql", "r", encoding="utf8") as schema_file:
         schema = schema_file.readlines()
 
     database.session.execute(''.join(schema))
