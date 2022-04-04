@@ -40,4 +40,4 @@ jobs:
       - name: Coverage report
         run: poetry run coverage xml
       - name: Coverage report to Codecov
-        run: codecov/codecov-action@v2
+        run: bash <(curl -s https://codecov.io/bash)
