@@ -1,5 +1,8 @@
 # Lukuvinkkikirjasto
 
+![GitHub Action](https://github.com/kimmomuli/Lukuvinkkikirjasto/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/kimmomuli/Lukuvinkkikirjasto/branch/main/graph/badge.svg?token=06TFSWVEKM)](https://codecov.io/gh/kimmomuli/Lukuvinkkikirjasto)
+
 ## Asennusohjeet
 1. Luo `.env` tiedosto projektin juureen ja lisää seuraavat rivit sinne
     ```
@@ -35,6 +38,12 @@ $ poetry run invoke start
     ```
     $ poetry run invoke test
     ```
+
+## Pylint
+
+```
+poetry run invoke lint
+```
 
 ## User storyt ja niiden hyväksymiskriteerit
 [Product backlog ja sprint backlog](https://github.com/kimmomuli/Lukuvinkkikirjasto/projects/1)
