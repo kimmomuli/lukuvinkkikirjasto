@@ -33,7 +33,7 @@ jobs:
         run: poetry install
       - name: Run tests
         env:
-          DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
+          DATABASE_URL: 'postgresql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
         run: poetry run coverage run --branch -m pytest
       - name: pylint
         run: poetry run pylint src
