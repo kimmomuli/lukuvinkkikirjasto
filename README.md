@@ -1,7 +1,7 @@
 # Lukuvinkkikirjasto
 
 ![GitHub Action](https://github.com/kimmomuli/Lukuvinkkikirjasto/workflows/CI/badge.svg)
-![codecov](https://codecov.io/gh/kimmomuli/Lukuvinkkikirjasto/branch/main/graph/badge.svg?token=06TFSWVEKM)](https://codecov.io/gh/kimmomuli/Lukuvinkkikirjasto)
+![codecov](https://codecov.io/gh/kimmomuli/Lukuvinkkikirjasto/branch/main/graph/badge.svg?token=06TFSWVEKM)
 
 ## Asennusohjeet
 1. Luo `.env` tiedosto projektin juureen ja lisää seuraavat rivit sinne
