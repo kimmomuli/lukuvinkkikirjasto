@@ -30,5 +30,5 @@ def luo_vinkki():
 
         tallenna_kirjavinkki(kirjavinkki)
         return redirect("/")
-    except:
+    except TypeError:
         return render_template("virhe.html")

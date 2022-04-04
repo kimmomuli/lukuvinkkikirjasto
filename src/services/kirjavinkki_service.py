@@ -5,5 +5,5 @@ from entities.kirjavinkki import Kirjavinkki
 def parse_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi, omistaja):
     try:
         return Kirjavinkki(str(otsikko), str(kirjailija), int(kirjoitusvuosi), str(omistaja))
-    except:
-        raise ValueError("Väärä syöte")
+    except TypeError as error:
+        raise TypeError("Väärä syöte") from error
