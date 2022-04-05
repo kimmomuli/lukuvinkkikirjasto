@@ -1,6 +1,7 @@
 __pycache__
 .env
 .env.test
+.coverage
 .vscode
 .pytest_cache
 venv
