@@ -2,8 +2,7 @@ from os import getenv
 from flask import Flask
 from config import DATABASE_URL
 from database import database
-from views import lukuvinkit
-
+from views import lukuvinkit, uusi_vinkki
 
 
 def create_app(testing: bool = False):
@@ -16,4 +15,5 @@ def create_app(testing: bool = False):
     database.init_app(app)
 
     app.register_blueprint(lukuvinkit.lukuvinkit_bp)
+    app.register_blueprint(uusi_vinkki.uusi_lukuvinkki_bp)
     return app
