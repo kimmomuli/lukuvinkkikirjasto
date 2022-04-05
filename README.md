@@ -41,6 +41,11 @@ $ poetry run invoke start
     $ poetry run invoke test
     ```
 
+## Testien kattavuusraportin luominen
+```
+$ poetry run invoke coverage-report
+```
+
 ## Pylint
 
 ```
