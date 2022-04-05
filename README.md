@@ -52,9 +52,12 @@ $ poetry run invoke coverage-report
 poetry run invoke lint
 ```
 
+## Backlogs ja burndown
+[Product backlog ja sprint backlog](https://github.com/kimmomuli/Lukuvinkkikirjasto/projects/1)
+
+<img src="https://user-images.githubusercontent.com/80842633/161778761-6f1b80e4-c75d-4a54-beff-cd797fe3de0c.png" width="600">
 
 ## User storyt ja niiden hyväksymiskriteerit
-[Product backlog ja sprint backlog](https://github.com/kimmomuli/Lukuvinkkikirjasto/projects/1)
 
 1. **Käyttäjä voi selata vinkkejä:** 
     - Käyttäjä voi selata vinkkejä.
