@@ -1,11 +1,11 @@
 from werkzeug.security import check_password_hash, generate_password_hash
-import database
+from database import database
 
 
 def luo_kayttaja(kayttajatunnus: str, salasana: str):
-    sql = "SELECT tunnus FROM kayttajat where tunnus = tunnus:"
+    sql = "SELECT tunnus FROM kayttajat where tunnus = :tunnus"
     kayttajatietue = database.session.execute(sql, {"tunnus": kayttajatunnus})
-    if kayttajatietue.fetchOne():
+    if kayttajatietue.fetchone():
         raise Exception("Käyttäjätunnus on jo olemassa")
     if len(salasana) < 6:
         raise Exception("Salasanan on oltava vähintään 6 merkkiä pitkä")
@@ -20,13 +20,13 @@ def luo_kayttaja(kayttajatunnus: str, salasana: str):
 
 
 def login(kayttajatunnus: str, salasana: str) -> bool:
-    sql = "SELECT tunnus,password FROM kayttajat where tunnus = tunnus:"
+    sql = "SELECT tunnus,password FROM kayttajat where tunnus = :tunnus"
     kayttajatietue = database.session.execute(
-        sql, {"tunnus": kayttajatunnus}).fetchOne()
+        sql, {"tunnus": kayttajatunnus}).fetchone()
     if kayttajatietue:
         if(check_password_hash(kayttajatietue[1], salasana)):
             return True
         else:
             return False
     else:
-        raise Exception("käyttäjätunnusta ei ole rekisteröity")
+        raise Exception("käyttäjätunnusta ei löydy")
