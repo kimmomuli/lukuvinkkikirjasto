@@ -46,3 +46,21 @@ class TestKayttajaRepo(flask_testing.TestCase):
             virheviesti = e.args[0]
         self.assertTrue(repositories.kayttajat.login(
             "Zelenskyi", "PutinOnNilkki"))
+
+    def test_vaaralla_salasanalla_ei_paase(self):
+        virheviesti = "tyhja"
+        try:
+            repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
+        except Exception as e:
+            virheviesti = e.args[0]
+        self.assertFalse(repositories.kayttajat.login(
+            "Zelenskyi", "PutinOnKiva"))
+
+    def test_ei_voi_luoda_samaa_kayttajaa_kahdesti(self):
+        virheviesti = ""
+        repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
+        try:
+            repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnKakka")
+        except Exception as e:
+            virheviesti = e.args[0]
+        self.assertEqual(virheviesti, "Käyttäjätunnus on jo olemassa")
