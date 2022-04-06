@@ -1,6 +1,7 @@
 *** Settings ***
 Library  SeleniumLibrary
 
+
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
