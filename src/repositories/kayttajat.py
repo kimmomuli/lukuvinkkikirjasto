@@ -24,9 +24,6 @@ def login(kayttajatunnus: str, salasana: str) -> bool:
     kayttajatietue = database.session.execute(
         sql, {"tunnus": kayttajatunnus}).fetchone()
     if kayttajatietue:
-        if(check_password_hash(kayttajatietue[1], salasana)):
-            return True
-        else:
-            return False
-    else:
-        raise Exception("käyttäjätunnusta ei löydy")
+        return check_password_hash(kayttajatietue[1], salasana)
+
+    raise Exception("käyttäjätunnusta ei löydy")
