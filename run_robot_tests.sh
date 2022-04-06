@@ -10,7 +10,7 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000/)" != "200" 
 done
 
 # suoritetaan testit
-poetry run robot src/tests
+poetry run robot tests
 status=$?
 
 # pysäytetään Flask-palvelin portissa 5000
