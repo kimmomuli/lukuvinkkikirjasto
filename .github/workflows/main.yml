@@ -45,7 +45,7 @@ jobs:
       - name: Run robot tests
         run: bash run_robot_tests.sh
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
+          DATABASE_URL: 'postgresql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
           FLASK_ENV: development
       - name: pylint
         run: poetry run pylint src
