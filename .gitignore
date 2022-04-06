@@ -7,3 +7,5 @@ htmlcov
 .coverage
 .vscode
 .pytest_cache
+log.html
+output.xml

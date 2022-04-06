@@ -20,6 +20,9 @@ pytest = "^7.1.1"
 pytest-dotenv = "^0.5.2"
 pylint = "^2.13.4"
 coverage = "^6.3.2"
+robotframework = "^5.0"
+robotframework-seleniumlibrary = "^6.0.0"
+requests = "^2.27.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
