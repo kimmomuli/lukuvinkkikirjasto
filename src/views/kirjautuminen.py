@@ -28,7 +28,6 @@ def kirjaudu():
         salasana = request.form["salasana"]
         if login(tunnus, salasana):
             return redirect("/")
-        else:
-            return redirect("/kirjautuminen")
+        return redirect("/kirjautuminen")
     except TypeError:
         return render_template("virhe.html")
