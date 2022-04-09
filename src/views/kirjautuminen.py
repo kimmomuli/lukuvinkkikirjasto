@@ -17,7 +17,7 @@ def rekisteroidu():
 
         luo_kayttaja(tunnus, salasana)
         return redirect("/")
-    except Exception:
+    except TypeError:
         return render_template("virhe.html")
 
 
@@ -28,5 +28,7 @@ def kirjaudu():
         salasana = request.form["salasana"]
         if login(tunnus, salasana):
             return redirect("/")
-    except Exception:
+        else:
+            return redirect("/kirjautuminen")
+    except TypeError:
         return render_template("virhe.html")
