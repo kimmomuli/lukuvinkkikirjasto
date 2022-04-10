@@ -10,6 +10,7 @@ CREATE TABLE vinkit (
     tyyppi TEXT,
     otsikko TEXT,
     tunnus TEXT,
+    luontiaika TIMESTAMP,
     PRIMARY KEY(tyyppi, otsikko)
 );
 

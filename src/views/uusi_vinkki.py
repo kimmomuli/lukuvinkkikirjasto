@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, redirect, request
+from flask import render_template, Blueprint, redirect, request, session
 from repositories.vinkit import tallenna_kirjavinkki
 from services.kirjavinkki_service import parse_kirjavinkki
 
@@ -16,7 +16,7 @@ def luo_vinkki():
         otsikko = request.form["otsikko"]
         kirjailija = request.form["kirjailija"]
         kirjoitusvuosi = request.form["kirjoitusvuosi"]
-        omistaja = request.form["omistaja"]
+        omistaja = session["username"]
 
         kirjavinkki = parse_kirjavinkki(
             otsikko, kirjailija, kirjoitusvuosi, omistaja

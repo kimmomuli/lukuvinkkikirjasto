@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, redirect, request
+from flask import render_template, Blueprint, redirect, request, session
 from repositories.kayttajat import login, luo_kayttaja
 
 kirjautuminen_bp = Blueprint("kirjautuminen", __name__)
@@ -16,6 +16,7 @@ def rekisteroidu():
         salasana = request.form["salasana"]
 
         luo_kayttaja(tunnus, salasana)
+        session["username"] = tunnus
         return redirect("/")
     except TypeError:
         return render_template("virhe.html")
@@ -27,6 +28,7 @@ def kirjaudu():
         tunnus = request.form["tunnus"]
         salasana = request.form["salasana"]
         if login(tunnus, salasana):
+            session["username"] = tunnus
             return redirect("/")
         return redirect("/kirjautuminen")
     except TypeError:

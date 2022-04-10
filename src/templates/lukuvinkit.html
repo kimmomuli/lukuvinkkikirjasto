@@ -4,8 +4,9 @@
 
 <h1>Lukuvinkit</h1>
 <hr>
-<a href="/uusi_vinkki">Luo uusi vinkki</a>
-<a href="/kirjautuminen">Kirjaudu / rekisteröidy</a>
+{% if session.username %} <a href="/uusi_vinkki">Luo uusi vinkki</a>  <a href="/kirjaudu_ulos" class="button1">Kirjaudu ulos</a> {%else%} <a href="/kirjautuminen">Kirjaudu / rekisteröidy</a> {%endif%}
+
+
 
 {% for vinkki in vinkit %}
 <hr />

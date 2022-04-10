@@ -1,5 +1,6 @@
 from os import getenv
 from flask import Flask
+from flask import session
 from config import DATABASE_URL
 from database import database
 from views import lukuvinkit, uusi_vinkki, kirjautuminen
