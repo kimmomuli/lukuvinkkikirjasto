@@ -35,3 +35,12 @@ class TestVinkit(flask_testing.TestCase):
         repositories.vinkit.tallenna_kirjavinkki(gulag)
         vinkit = repositories.vinkit.lataa_kirjat()
         self.assertEqual(vinkit[0].omistaja, gulag.omistaja)
+
+    def test_uusin_vinkki_ensimmaisena(self):
+        karamazov = Kirjavinkki(
+            "Karamazovin veljekset - Bratja Karamazovy", "Fedor Dostojevski", 1880)
+        repositories.vinkit.tallenna_kirjavinkki(karamazov)
+        anna = Kirjavinkki("Anna Karenina", "Leo Tolstoi", 1878, "testaaja ")
+        repositories.vinkit.tallenna_kirjavinkki(anna)
+        vinkit = repositories.vinkit.lataa_kirjat()
+        self.assertEqual(vinkit[0].otsikko, anna.otsikko)

@@ -5,13 +5,13 @@ from datetime import datetime as dt
 
 
 def lataa_kirjat() -> List[Kirjavinkki]:
-    sql = "SELECT a.otsikko, a.kirjailija, a.kirjoitusvuosi, b.tunnus FROM kirjat as a INNER JOIN vinkit as b ON a.otsikko = b.otsikko ORDER BY luontiaika"
+    sql = "SELECT a.otsikko, a.kirjailija, a.kirjoitusvuosi,b.luontiaika, b.tunnus FROM kirjat as a INNER JOIN vinkit as b ON a.otsikko = b.otsikko ORDER BY luontiaika DESC"
     tulos = database.session.execute(sql)
     vinkit = tulos.fetchall()
     kirjavinkit = []
     for vinkki in vinkit:
         kirjavinkit.append(Kirjavinkki(
-            vinkki["otsikko"], vinkki["kirjailija"], vinkki["kirjoitusvuosi"], vinkki["tunnus"]))
+            vinkki["otsikko"], vinkki["kirjailija"], vinkki["kirjoitusvuosi"], vinkki["tunnus"], vinkki["luontiaika"]))
     return kirjavinkit
 
 
