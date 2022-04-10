@@ -9,13 +9,15 @@ CREATE TABLE kayttajat (
 CREATE TABLE vinkit (
     tyyppi TEXT,
     otsikko TEXT,
+    tekija TEXT,
     tunnus TEXT,
     luontiaika TIMESTAMP,
-    PRIMARY KEY(tyyppi, otsikko)
+    PRIMARY KEY(tyyppi, otsikko,tunnus)
 );
 
 CREATE TABLE kirjat (
-    otsikko TEXT PRIMARY KEY,
+    otsikko TEXT,
     kirjailija TEXT,
-    kirjoitusvuosi INTEGER
+    kirjoitusvuosi INTEGER,
+    PRIMARY KEY(otsikko,kirjailija)
 );
