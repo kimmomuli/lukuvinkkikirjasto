@@ -7,7 +7,8 @@ lukuvinkit_bp = Blueprint("lukuvinkit", __name__)
 @lukuvinkit_bp.route("/")
 def lukuvinkit():
     vinkit = lataa_kirjat()
-    return render_template("lukuvinkit.html", vinkit=vinkit)
+    error=None
+    return render_template("lukuvinkit.html", vinkit=vinkit, error=error)
 
 
 @lukuvinkit_bp.route("/kirjaudu_ulos")

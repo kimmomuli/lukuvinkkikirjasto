@@ -3,10 +3,9 @@
 {% block content %}
 
 <h1>Lukuvinkit</h1>
+
 <hr>
 {% if session.username %} <a href="/uusi_vinkki">Luo uusi vinkki</a>  <a href="/kirjaudu_ulos" class="button1">Kirjaudu ulos</a> {%else%} <a href="/kirjautuminen">Kirjaudu / rekisteröidy</a> {%endif%}
-
-
 
 {% for vinkki in vinkit %}
 <hr />
@@ -31,7 +30,7 @@
             </tr>
             <tr>
                 <td>Luontiaika</td>
-                <td>{{vinkki.aikaleima}}</td>
+                <td>{{vinkki.aikaleima.strftime("%H:%M / %d-%m-%Y") }}</td>
             </tr>
         </tbody>
     </table>
