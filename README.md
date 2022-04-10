@@ -57,14 +57,5 @@ poetry run invoke lint
 
 <img src="https://user-images.githubusercontent.com/80842633/161778761-6f1b80e4-c75d-4a54-beff-cd797fe3de0c.png" width="600">
 
-## User storyt ja niiden hyväksymiskriteerit
-
-1. **Käyttäjä voi selata vinkkejä:** 
-    - Käyttäjä voi selata vinkkejä.
-    - Vinkit haetaan tietokannasta. 
-
-2. **Käyttäjä voi lisätä uuden kirjasuosituksen:** 
-    - Käyttäjä voi lisätä kirjasuosituksen, joka sisältää kirjan otsikon, kirjailijan ja julkaisuvuoden.
-    - Vinkki tallennetaan tietokantaan.
-    - Ohjelma varoittaa jos vinkin tiedot ovat väärän tyyppisiä.
-    - Ohjelma varoittaa jos kaksi eri käyttäjää haluaa lisätä saman kirjan. 
+## DoD
+![Definition of done ](https://github.com/kimmomuli/Lukuvinkkikirjasto/blob/main/dokumentaatio/definiton_of_done.md)
