@@ -1,20 +1,16 @@
 def tarkista_merkkijonomuoto(sana) -> bool:
-    try:
-        sana = str(sana)
+    if type(sana) == str:
         return True
-    except:
-        return False
+    return False
 
 
 def tarkista_numeromuoto(numero) -> bool:
-    try:
-        numero = int(numero)
+    if type(numero) == int:
         return True
-    except:
-        return False
+    return False
 
 
-def tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi):
+def tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi) -> str:
 
     if not tarkista_merkkijonomuoto(otsikko):
         return "Otsikon pitää olla merkkijono"

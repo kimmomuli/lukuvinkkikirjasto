@@ -13,54 +13,54 @@ class TestKayttajaRepo(flask_testing.TestCase):
         initialize_database()
 
     def test_liian_lyhyt_kayttajatunnus_ei_kelpaa(self):
-        virheviesti = ""
-        try:
-            repositories.kayttajat.luo_kayttaja("ea", "PutinOnNilkki")
-        except Exception as e:
-            virheviesti = e.args[0]
+        virheviesti = repositories.kayttajat.luo_kayttaja(
+            "ea", "PutinOnNilkki"
+        )
         self.assertEqual(
-            virheviesti, "Kayttäjätunnukset on oltava vähintään 6 merkkiä pitkä")
+            virheviesti, "Kayttäjätunnukset on oltava vähintään 4 merkkiä pitkä"
+        )
 
     def test_liian_lyhyt_salasana_ei_kelpaa(self):
-        virheviesti = ""
-        try:
-            repositories.kayttajat.luo_kayttaja("Zelenskyi", "Putin")
-        except Exception as e:
-            virheviesti = e.args[0]
+        virheviesti = repositories.kayttajat.luo_kayttaja(
+            "Zelenskyi", "Putin"
+        )
         self.assertEqual(
-            virheviesti, "Salasanan on oltava vähintään 6 merkkiä pitkä")
+            virheviesti, "Salasanan on oltava vähintään 6 merkkiä pitkä"
+        )
 
     def test_uuden_kayttajan_luonti_onnistuu(self):
-        virheviesti = "tyhja"
-        try:
-            repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
-        except Exception as e:
-            virheviesti = e.args[0]
-        self.assertEqual(virheviesti, "tyhja")
+        virheviesti = repositories.kayttajat.luo_kayttaja(
+            "Zelenskyi", "PutinOnNilkki"
+        )
+        self.assertEqual(virheviesti, "")
 
     def test_voi_luoda_kayttajan_ja_logata_sisaan(self):
-        virheviesti = "tyhja"
-        try:
-            repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
-        except Exception as e:
-            virheviesti = e.args[0]
+        repositories.kayttajat.luo_kayttaja(
+            "Zelenskyi", "PutinOnNilkki"
+        )
         self.assertTrue(repositories.kayttajat.login(
-            "Zelenskyi", "PutinOnNilkki"))
+            "Zelenskyi", "PutinOnNilkki"
+        ))
 
     def test_vaaralla_salasanalla_ei_paase(self):
-        virheviesti = "tyhja"
-        try:
-            repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
-        except Exception as e:
-            virheviesti = e.args[0]
+        repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
+
         self.assertFalse(repositories.kayttajat.login(
-            "Zelenskyi", "PutinOnKiva"))
+            "Zelenskyi", "PutinOnKiva"
+        ))
 
     def test_ei_voi_luoda_samaa_kayttajaa_kahdesti(self):
-        virheviesti = ""
-        repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnNilkki")
-        try:
-            repositories.kayttajat.luo_kayttaja("Zelenskyi", "PutinOnKakka")
-        except Exception as e:
-            virheviesti = e.args[0]
+        repositories.kayttajat.luo_kayttaja(
+            "Zelenskyi", "PutinOnNilkki"
+        )
+        virheviesti = repositories.kayttajat.luo_kayttaja(
+            "Zelenskyi", "PutinOnKakka"
+        )
         self.assertEqual(virheviesti, "Käyttäjätunnus on jo olemassa")
+
+    def test_kirjautuminen_vaaralla_tunnuksella(self):
+        self.assertFalse(
+            repositories.kayttajat.login(
+                "Putin", "PutininSalasana"
+            )
+        )
