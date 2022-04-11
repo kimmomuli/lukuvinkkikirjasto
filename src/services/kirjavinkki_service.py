@@ -1,36 +1,31 @@
-from sqlalchemy import false, true
-from entities.kirjavinkki import Kirjavinkki
-import string
-
-
-# Ei käytetä tyyppivihjeitä vielä tässä vaiheessa
-def parse_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi, omistaja):
+def tarkista_merkkijonomuoto(sana) -> bool:
     try:
-        return Kirjavinkki(str(otsikko), str(kirjailija), int(kirjoitusvuosi), str(omistaja))
-    except TypeError as error:
-        raise TypeError("Väärä syöte") from error
+        sana = str(sana)
+        return True
+    except:
+        return False
+
+
+def tarkista_numeromuoto(numero) -> bool:
+    try:
+        numero = int(numero)
+        return True
+    except:
+        return False
+
 
 def tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi):
-    virheet = []
-    sallitut_merkit = string.ascii_letters+string.whitespace
-    sisaltaako_vuosi_numeroita = true
-    if len(otsikko) < 2:
-        virheet.append("Otsikon tulee sisältää ainakin kaksi merkkiä")
-    if len(kirjailija) < 2:
-        virheet.append("Kirjailijan nimen tulee sisältää ainakin kaksi merkkiä")
-    if not all (merkki in sallitut_merkit for merkki in kirjailija):
-        virheet.append("Kirjailijan nimi voi sisältää vain kirjaimia tai välilyöntejä")
-    if not all (merkki in string.digits for merkki in kirjoitusvuosi):
-        sisaltaako_vuosi_numeroita = false
-        virheet.append("Kirjoitusvuosi ei voi sisältää muita merkkejä kuin numeroita")
-    if len(kirjoitusvuosi) == 0:
-        sisaltaako_vuosi_numeroita = false
-        virheet.append("Vuosi ei voi olla 0")
-    if sisaltaako_vuosi_numeroita == true:
-        if int(kirjoitusvuosi)<0 or int(kirjoitusvuosi)>2025:
-            virheet.append("Kirjan tulee olla kirjoitettu 1-2025 välisinä vuosina")
-    if not virheet:
-        return []
-    return virheet
+    # Otsikko ja kirjailija voivat sisältää numeroita, kun ne vain ovat merkkijonomuodossa!
 
+    if not tarkista_merkkijonomuoto(otsikko) and len(otsikko) < 2:
+        return "Otsikon pitää olla merkkijono ja sen tulee sisältää ainakin kaksi merkkiä"
 
+    if not tarkista_merkkijonomuoto(kirjailija) and len(kirjailija) < 2:
+        return "Kirjailijan pitää olla merkkijono ja sen tulee sisältää ainakin kaksi merkkiä"
+
+    if not tarkista_numeromuoto(kirjoitusvuosi):
+        return "Kirjoitusvuosi pitää olla numero"
+    elif not (1 < int(kirjoitusvuosi) < 2025):
+        return "Kirjoitusvuosi pitää olla numero väliltä 1-2025"
+
+    return ""

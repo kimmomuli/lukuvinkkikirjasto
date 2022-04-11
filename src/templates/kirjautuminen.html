@@ -5,7 +5,7 @@
 <h1>Kirjaudu</h1>
 <form action="/kirjaudu" method="POST">
     <p>
-       Käyttäjätunnus <br>
+        Käyttäjätunnus <br>
         <input type="text" name="tunnus">
     </p>
     <p>
@@ -16,22 +16,8 @@
 
     <input type="submit" value="Kirjaudu">
 </form>
+<hr>
 
-
-
-<h1>Rekisteröidy</h1>
-<form action="/rekisteroidu" method="POST">
-    <p>
-       Käyttäjätunnus <br>
-        <input type="text" name="tunnus">
-    </p>
-    <p>
-        Salasana: <br>
-        <input type="password" name="salasana">
-    </p>
-
-
-    <input type="submit" value="Rekisteröidy">
-</form>
+<a href="/rekisteroityminen">Luo tunnus</a>
 
 {% endblock %}

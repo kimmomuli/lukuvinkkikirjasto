@@ -1,7 +1,7 @@
 from typing import List
+from datetime import datetime as dt
 from database import database
 from entities.kirjavinkki import Kirjavinkki
-from datetime import datetime as dt
 
 
 def lataa_kirjat() -> List[Kirjavinkki]:
@@ -26,5 +26,5 @@ def tallenna_kirjavinkki(kirjavinkki: Kirjavinkki):
     database.session.commit()
 
 
-def poista_vinkki(vinkki):
-    pass
+# def poista_vinkki(vinkki):
+#    pass

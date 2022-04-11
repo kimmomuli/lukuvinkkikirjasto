@@ -1,9 +1,9 @@
 from os import getenv
 from flask import Flask
-from flask import session
+from flask import session  # pylint: disable=unused-import
 from config import DATABASE_URL
 from database import database
-from views import lukuvinkit, uusi_vinkki, kirjautuminen
+from views import lukuvinkit, uusi_vinkki, kirjautuminen, rekisteroityminen
 
 
 def create_app(testing: bool = False):
@@ -18,4 +18,5 @@ def create_app(testing: bool = False):
     app.register_blueprint(lukuvinkit.lukuvinkit_bp)
     app.register_blueprint(uusi_vinkki.uusi_lukuvinkki_bp)
     app.register_blueprint(kirjautuminen.kirjautuminen_bp)
+    app.register_blueprint(rekisteroityminen.rekisteroityminen_bp)
     return app
