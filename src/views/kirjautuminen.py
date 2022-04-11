@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, redirect, request, session, flash
-from repositories.kayttajat import login, luo_kayttaja
+from repositories.kayttajat import login
 
 kirjautuminen_bp = Blueprint("kirjautuminen", __name__)
 
