@@ -5,8 +5,8 @@ Library  ../AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
-${BROWSER}  chrome
-${DELAY}  0.5 seconds
+${BROWSER}  headlesschrome
+${DELAY}  0 seconds
 ${HOME URL}  http://${SERVER}
 ${LISAA URL}  http://${SERVER}/uusi_vinkki
 ${KIRJAUTUMINEN URL}  http://${SERVER}/kirjautuminen
