@@ -45,7 +45,6 @@ jobs:
       - name: Run robot tests
         run: bash run_robot_tests.sh
         env:
-	  SECRET_KEY: "secretkey"
           DATABASE_URL: 'postgresql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
           FLASK_ENV: development
       - name: pylint
