@@ -1,9 +1,9 @@
 from os import getenv
 from flask import Flask
 from flask import session  # pylint: disable=unused-import
-from config import DATABASE_URL
+from config import DATABASE_URL, ENV
 from database import database
-from views import lukuvinkit, uusi_vinkki, kirjautuminen, rekisteroityminen
+from views import lukuvinkit, uusi_vinkki, kirjautuminen, rekisteroityminen, tests
 
 
 def create_app():
@@ -18,4 +18,6 @@ def create_app():
     app.register_blueprint(uusi_vinkki.uusi_lukuvinkki_bp)
     app.register_blueprint(kirjautuminen.kirjautuminen_bp)
     app.register_blueprint(rekisteroityminen.rekisteroityminen_bp)
+    if ENV == "testing":
+        app.register_blueprint(tests.tests_bp)
     return app

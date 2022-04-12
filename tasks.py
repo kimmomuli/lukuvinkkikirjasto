@@ -29,3 +29,8 @@ def lint(ctx):
 @task
 def initialize_database(ctx):
     ctx.run("python3 src/initialize_database.py", pty=True)
+
+
+@task
+def robot(ctx):
+    ctx.run("ENV=testing bash run_robot_tests.sh", pty=True)

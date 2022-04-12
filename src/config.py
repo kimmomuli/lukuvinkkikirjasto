@@ -9,3 +9,4 @@ except FileNotFoundError:
     pass
 
 DATABASE_URL = os.getenv('DATABASE_URL')
+ENV = os.getenv('ENV') or 'production'

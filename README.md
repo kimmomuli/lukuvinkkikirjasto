@@ -50,6 +50,11 @@ $ poetry run invoke start
 $ poetry run invoke coverage-report
 ```
 
+## Hyväksymistestien ajaminen
+```
+$ poetry run invoke robot
+```
+
 ## Pylint
 
 ```

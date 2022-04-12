@@ -51,7 +51,6 @@ Set Salasana
     Input Password  salasana  ${salasana}
 
 Reset Database And Create User
-    #Reset Database
     Create User  robotti  robotti123
     Go To Kirjautuminen Page
     Kirjautuminen Page Should Be Open
