@@ -1,3 +1,5 @@
+from datetime import date
+
 def tarkista_merkkijonomuoto(sana) -> bool:
     if isinstance(sana, str):
         return True
@@ -11,6 +13,7 @@ def tarkista_numeromuoto(numero) -> bool:
 
 
 def tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi) -> str:
+    three_years_from_this_year = int(date.today().year) + 3
 
     if not tarkista_merkkijonomuoto(otsikko):
         return "Otsikon pitää olla merkkijono"
@@ -24,7 +27,7 @@ def tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi) -> str:
 
     if not tarkista_numeromuoto(kirjoitusvuosi):
         return "Kirjoitusvuosi pitää olla numero"
-    if not 1 < int(kirjoitusvuosi) < 2025:
+    if not 1 < int(kirjoitusvuosi) < three_years_from_this_year:
         return "Kirjoitusvuosi pitää olla numero väliltä 1-2025"
 
     return ""
