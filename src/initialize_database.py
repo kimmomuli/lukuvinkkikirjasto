@@ -22,3 +22,7 @@ def create_tables():
 def initialize_database():
     drop_tables()
     create_tables()
+
+
+if __name__ == "__main__":
+    initialize_database()

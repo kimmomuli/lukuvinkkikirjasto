@@ -24,6 +24,10 @@
     ```
     $ poetry install
     ```
+3. Alusta tietokanta
+   ```
+   $ poetry run invoke initialize-database
+   ```
 
 ## Projektin ajaminen
 ```
