@@ -1,25 +1,17 @@
-def tarkista_merkkijonomuoto(sana) -> bool:
-    if isinstance(sana, str):
-        return True
-    return False
-
 
 def tarkista_numeromuoto(numero) -> bool:
-    if isinstance(numero, int):
+    try:
+        numero = int(numero)
         return True
-    return False
+    except:  # pylint: disable=bare-except
+        return False
 
 
 def tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi) -> str:
-
-    if not tarkista_merkkijonomuoto(otsikko):
-        return "Otsikon pitää olla merkkijono"
-    if len(otsikko) < 2:
+    if len(str(otsikko)) < 2:
         return "Otsikon tulee sisältää ainakin kaksi merkkiä"
 
-    if not tarkista_merkkijonomuoto(kirjailija):
-        return "Kirjailijan pitää olla merkkijono"
-    if len(kirjailija) < 2:
+    if len(str(kirjailija)) < 2:
         return "Kirjailijan tulee sisältää ainakin kaksi merkkiä"
 
     if not tarkista_numeromuoto(kirjoitusvuosi):

@@ -10,16 +10,9 @@ class ServiceTest(unittest.TestCase):
         virhe = tarkista_kirjavinkki("otsikko", "kirjailija", 2002)
         self.assertEqual(virhe, "")
 
-    def test_tarkista_kirjavinkki_vaaralla_otsikolla(self):
-        virhe = tarkista_kirjavinkki(123, "kirjailija", 2002)
-        self.assertEqual(virhe, "Otsikon pitää olla merkkijono")
-
-    def test_tarkista_kirjavinkki_vaaralla_kirjailijalla(self):
-        virhe = tarkista_kirjavinkki("otsikko", 123, 2002)
-        self.assertEqual(virhe, "Kirjailijan pitää olla merkkijono")
-
     def test_tarkista_kirjavinkki_vaaralla_kirjoitusvuodella(self):
-        virhe = tarkista_kirjavinkki("otsikko", "kirjailija", "2002")
+        virhe = tarkista_kirjavinkki(
+            "otsikko", "kirjailija", "vuosi")
         self.assertEqual(virhe, "Kirjoitusvuosi pitää olla numero")
 
     def test_tarkista_kirjavinkki_liian_lyhyella_otsikolla(self):
