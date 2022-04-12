@@ -13,9 +13,9 @@ Lisaa Vinkki Validilla Otsikolla Kirjailijalla Ja Vuodella
     Submit Credentials
     Click Link  Luo uusi vinkki
     Lisaa Page Should Be Open
-    Set Otsikko  Tuntematon Sotilas
-    Set Kirjailija  Väinö Linna
-    Set Kirjoitusvuosi  1954
+    Set Otsikko  Sinuhe egyptiläinen
+    Set Kirjailija  Mika Waltari
+    Set Kirjoitusvuosi  1945
     Lisaa Vinkki
     Home Page Should Be Open
 

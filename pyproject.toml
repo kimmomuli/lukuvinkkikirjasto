@@ -12,6 +12,7 @@ Flask-SQLAlchemy = "^2.5.1"
 psycopg2 = "^2.9.3"
 invoke = "^1.7.0"
 Flask-Testing = "^0.8.1"
+robotframework-databaselibrary = "^1.2.4"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.6.0"

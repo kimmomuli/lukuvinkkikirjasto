@@ -508,6 +508,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "robotframework-databaselibrary"
+version = "1.2.4"
+description = "Database utility library for Robot Framework"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "robotframework-pythonlibcore"
 version = "3.0.0"
 description = "Tools to ease creating larger test libraries for Robot Framework using Python."
@@ -708,7 +716,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ed1f31a9276b7ddecc1e403d1d96ee546f0fe2f1defbf30032da565dd5557a28"
+content-hash = "c024fee41a93cfa0fd89f9577954086869547a0114381374b9ff194a8414d567"
 
 [metadata.files]
 astroid = [
@@ -1130,6 +1138,10 @@ requests = [
 robotframework = [
     {file = "robotframework-5.0-py3-none-any.whl", hash = "sha256:ee912636885e2dc4bcf4ec1d5b3ac2a5b81cadfcfedf4a169bd4ad6576ff8f53"},
     {file = "robotframework-5.0.zip", hash = "sha256:bffecba8c43d4294936d921f0af4941079039edce88194769133719732c608bc"},
+]
+robotframework-databaselibrary = [
+    {file = "robotframework-databaselibrary-1.2.4.tar.gz", hash = "sha256:627d872b3dda6a308a650ac9e676dadedf9c294e4ef70ad207cbb86b78eb8847"},
+    {file = "robotframework_databaselibrary-1.2.4-py3-none-any.whl", hash = "sha256:150ca765fff85c5fcf74e4b4d0f33fe5e73fe754fa224a905596468f74e69dd7"},
 ]
 robotframework-pythonlibcore = [
     {file = "robotframework-pythonlibcore-3.0.0.tar.gz", hash = "sha256:1bce3b8dfcb7519789ee3a89320f6402e126f6d0a02794184a1ab8cee0e46b5d"},
