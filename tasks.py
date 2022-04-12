@@ -33,4 +33,4 @@ def initialize_database(ctx):
 
 @task
 def robot(ctx):
-    ctx.run("ENV=testing bash run_robot_tests.sh", pty=True)
+    ctx.run("dotenv -f .env.test run bash run_robot_tests.sh", pty=True)

@@ -34,9 +34,10 @@ $ poetry run invoke start
 
 ## Testien ajaminen
 #### Testien alustaminen
-Luo `.env.test` tiedosto projektin juureen ja lisää seuraa rivi sinne
+Luo `.env.test` tiedosto projektin juureen ja lisää seuraavat rivit sinne
 ```
 DATABASE_URL=<postgresql:///testi_tietokannan_nimi>
+ENV=testing
 ```
 Missä `<postgresql:///testi_tietokannan_nimi>` on testeissä käytettävän tietokannan osoite.
 
