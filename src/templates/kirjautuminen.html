@@ -1,22 +1,20 @@
 {% extends "layout.html" %}
-{% block title %}Kirjaudu tai rekisteröidy{% endblock %}
+{% block title %}Kirjaudu sisään{% endblock %}
 {% block content %}
 
 <h1>Kirjaudu</h1>
-<form action="/kirjaudu" method="POST">
+<form method="POST">
     <p>
-        Käyttäjätunnus <br>
-        <input type="text" name="tunnus">
+        Käyttäjätunnus <br />
+        <input type="text" name="tunnus" value="{{tunnus}}" placeholder="Tunnus" />
     </p>
     <p>
-        Salasana: <br>
-        <input type="password" name="salasana">
+        Salasana <br />
+        <input type="password" name="salasana" placeholder="Salasana" />
     </p>
-
-
-    <input type="submit" value="Kirjaudu">
+    <input type="submit" value="Kirjaudu" />
 </form>
-<hr>
+<hr />
 
 <a href="/rekisteroityminen">Luo tunnus</a>
 

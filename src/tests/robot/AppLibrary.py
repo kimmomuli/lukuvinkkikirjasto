@@ -16,4 +16,4 @@ class AppLibrary:
             "salasana": salasana,
         }
 
-        requests.post(f"{self._base_url}/rekisteroidu", data=data)
+        requests.post(f"{self._base_url}/rekisteroityminen", data=data)

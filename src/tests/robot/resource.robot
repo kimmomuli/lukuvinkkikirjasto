@@ -31,12 +31,10 @@ Home Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Lukuvinkit
 
 Rekisteroityminen Page Should Be Open
-    Title Should Be  Lukuvinkkisovellus - Kirjaudu tai rekisteröidy
-    Page Should Contain  Rekisteröidy
+    Title Should Be  Lukuvinkkisovellus - Rekisteröidy
 
 Kirjautuminen Page Should Be Open
-    Title Should Be  Lukuvinkkisovellus - Kirjaudu tai rekisteröidy
-    Page Should Contain  Kirjaudu
+    Title Should Be  Lukuvinkkisovellus - Kirjaudu sisään
 
 Lisaa Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Luo lukuvinkki

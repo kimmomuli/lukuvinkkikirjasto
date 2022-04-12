@@ -1,20 +1,19 @@
 {% extends "layout.html" %}
-{% block title %}Kirjaudu tai rekisteröidy{% endblock %}
+{% block title %}Rekisteröidy{% endblock %}
 {% block content %}
 
 <h1>Rekisteröidy</h1>
-<form action="/rekisteroidu" method="POST">
-  <p>
-    Käyttäjätunnus <br>
-    <input type="text" name="tunnus">
-  </p>
-  <p>
-    Salasana: <br>
-    <input type="password" name="salasana">
-  </p>
 
-
-  <input type="submit" value="Rekisteröidy">
+<form method="POST">
+    <p>
+        Käyttäjätunnus <br />
+        <input type="text" name="tunnus" value="{{tunnus}}" placeholder="Tunnus" />
+    </p>
+    <p>
+        Salasana <br />
+        <input type="password" name="salasana" placeholder="Salasana" />
+    </p>
+    <input type="submit" value="Rekisteröidy" />
 </form>
 
 {% endblock %}

@@ -1,22 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <head>
     <title>Lukuvinkkisovellus - {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
 
 <body>
     <!-- virheilmoitukset -->
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <h2>Virheet: </h2>
-            <ul class=flashes>
-                {% for category, message in messages %}
-                <li class={{flashes}}>
-                    {{ message }}
-                </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    {% if messages %}
+    <h2>Virheet:</h2>
+    <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="{{flashes}}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% endwith %}
 
     {% block content %}{% endblock %}

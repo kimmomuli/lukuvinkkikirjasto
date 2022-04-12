@@ -4,19 +4,17 @@ from services.kayttaja_service import kayttaja_service
 rekisteroityminen_bp = Blueprint("rekisteroityminen", __name__)
 
 
-@rekisteroityminen_bp.route("/rekisteroityminen")
+@rekisteroityminen_bp.route("/rekisteroityminen", methods=["GET", "POST"])
 def rekisteroityminen():
-    return render_template("rekisteroityminen.html")
+    tunnus = ""
+    if request.method == "POST":
+        tunnus = request.form["tunnus"]
+        salasana = request.form["salasana"]
 
-
-@rekisteroityminen_bp.route("/rekisteroidu", methods=["POST"])
-def rekisteroidu():
-    tunnus = request.form["tunnus"]
-    salasana = request.form["salasana"]
-
-    virhe = kayttaja_service.luo_kayttaja(tunnus, salasana)
-    if len(virhe) > 0:
+        virhe = kayttaja_service.luo_kayttaja(tunnus, salasana)
+        if not virhe:
+            session["username"] = tunnus
+            return redirect("/")
         flash(virhe, "virhe")
-        return redirect("/rekisteroityminen")
-    session["username"] = tunnus
-    return redirect("/")
+
+    return render_template("rekisteroityminen.html", tunnus=tunnus)

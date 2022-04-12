@@ -4,23 +4,20 @@
 
 <h1>Luo lukuvinkki</h1>
 
-
-<form action="/luo_vinkki" method="POST">
+<form method="POST">
     <p>
-        Otsikko: <br>
-        <input type="text" name="otsikko">
+        Otsikko: <br />
+        <input type="text" name="otsikko" value="{{otsikko}}" placeholder="Otsikko" />
     </p>
     <p>
-        Kirjailija: <br>
-        <input type="text" name="kirjailija">
+        Kirjailija: <br />
+        <input type="text" name="kirjailija" value="{{kirjailija}}" placeholder="Kirjailija" />
     </p>
     <p>
-        Kirjoitusvuosi: <br>
-        <input type="number" name="kirjoitusvuosi">
+        Kirjoitusvuosi: <br />
+        <input type="number" name="kirjoitusvuosi" value="{{kirjoitusvuosi}}" placeholder="Kirjoitusvuosi" />
     </p>
-
-
-    <input type="submit" value="luo vinkki">
+    <input type="submit" value="luo vinkki" />
 </form>
 
 {% endblock %}
