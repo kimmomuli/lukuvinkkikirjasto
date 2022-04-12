@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint
-from repositories.vinkit import vinkki_repositorio
+from repositories.vinkki_repositorio import vinkki_repositorio
 
 lukuvinkit_bp = Blueprint("lukuvinkit", __name__)
 

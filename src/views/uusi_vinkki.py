@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, redirect, request, session, flash
-from repositories.vinkit import vinkki_repositorio
+from repositories.vinkki_repositorio import vinkki_repositorio
 from services.kirjavinkki_service import kirjavinkki_service
 from entities.kirjavinkki import Kirjavinkki
 

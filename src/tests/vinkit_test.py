@@ -1,5 +1,5 @@
 import unittest
-from repositories.vinkit import vinkki_repositorio
+from repositories.vinkki_repositorio import vinkki_repositorio
 from entities.kirjavinkki import Kirjavinkki
 
 

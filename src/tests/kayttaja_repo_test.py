@@ -1,5 +1,5 @@
 import unittest
-from repositories.kayttajat import kayttaja_repository
+from repositories.kayttaja_repositorio import kayttaja_repository
 
 
 class TestKayttajaRepo(unittest.TestCase):
