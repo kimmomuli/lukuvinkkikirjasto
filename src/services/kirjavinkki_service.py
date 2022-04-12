@@ -21,8 +21,9 @@ class KirjavinkkiService:
         kirjavinkki = Kirjavinkki(
             otsikko, kirjailija, kirjoitusvuosi, omistaja
         )
-        self.vinkki_repositorio.tallenna_kirjavinkki(kirjavinkki)
-
+        tulos = self.vinkki_repositorio.tallenna_kirjavinkki(kirjavinkki)
+        if not tulos:
+            return "Olet jo lisännyt kirjavinkin samalla otsikolla"
         return ""
 
 

@@ -12,6 +12,7 @@ Lisaa Vinkki Validilla Otsikolla Kirjailijalla Ja Vuodella
     Set Kirjoitusvuosi  1945
     Lisaa Vinkki
     Home Page Should Be Open
+    Page Should Contain  Sinuhe egyptiläinen
 
 Lisaa Vinkki Liian Lyhyella Otsikolla
     Set Otsikko  S
@@ -44,6 +45,23 @@ Lisaa Vinkki Liian Suurella Kirjoitusvuodella
     Lisaa Vinkki
     Lisaa Page Should Be Open
     Page Should Contain  Kirjoitusvuoden pitää olla numero väliltä 1-2025
+
+Lisaa Duplikaatti
+    Set Otsikko  Sinuhe egyptiläinen
+    Set Kirjailija  Mika Waltari
+    Set Kirjoitusvuosi  1945
+    Lisaa Vinkki
+    Home Page Should Be Open
+    Page Should Contain  Sinuhe egyptiläinen
+
+    Go To Lisaa Page
+    Set Otsikko  Sinuhe egyptiläinen
+    Set Kirjailija  Mika Waltari
+    Set Kirjoitusvuosi  1945
+    Lisaa Vinkki
+    Lisaa Page Should Be Open
+    Page Should Contain  Olet jo lisännyt kirjavinkin samalla otsikolla
+
 
 *** Keywords ***
 Lisaa Vinkki

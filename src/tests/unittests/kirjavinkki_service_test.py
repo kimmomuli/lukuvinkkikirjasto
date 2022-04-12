@@ -1,67 +1,77 @@
 import unittest
-from unittest.mock import Mock
+from entities.kirjavinkki import Kirjavinkki
 from services.kirjavinkki_service import KirjavinkkiService
+
+
+class StubVinkkiRepositorio:
+    def __init__(self):
+        self.vinkit = []
+
+    def tallenna_kirjavinkki(self, kirjavinkki: Kirjavinkki) -> bool:
+        for vinkki in self.vinkit:
+            if vinkki == (kirjavinkki.otsikko, kirjavinkki.omistaja):
+                return False
+        self.vinkit.append((kirjavinkki.otsikko, kirjavinkki.omistaja))
+        return True
 
 
 class KirjavinkkiServiceTest(unittest.TestCase):
     def setUp(self):
-        self.vinkki_repositorio_mock = Mock()
-        self.kirjavinkki_service = KirjavinkkiService(
-            self.vinkki_repositorio_mock)
+        self.kirjavinkki_service = KirjavinkkiService(StubVinkkiRepositorio())
 
-    def test_tarkista_kirjavinkki_oikealla_syotteella(self):
+    def test_lisaa_kirjavinkki_oikealla_syotteella(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "2002", "kayttaja")
         self.assertEqual(virhe, "")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_called_once()
 
-    def test_tarkista_kirjavinkki_kirjoitusvuodella_joka_on_desimaaliluku(self):
+    def test_lisaa_kirjavinkki_kirjoitusvuodella_joka_on_desimaaliluku(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "1.5", "kayttaja")
         self.assertEqual(virhe, "Kirjoitusvuoden pitää olla numero")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_not_called()
 
-    def test_tarkista_kirjavinkki_vaaralla_kirjoitusvuodella(self):
+    def test_lisaa_kirjavinkki_vaaralla_kirjoitusvuodella(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "vuosi", "kayttaja")
         self.assertEqual(virhe, "Kirjoitusvuoden pitää olla numero")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_not_called()
 
-    def test_tarkista_kirjavinkki_liian_lyhyella_otsikolla(self):
+    def test_lisaa_kirjavinkki_liian_lyhyella_otsikolla(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "", "kirjailija", 2002, "kayttaja")
         self.assertEqual(virhe, "Otsikon tulee sisältää ainakin kaksi merkkiä")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_not_called()
 
-    def test_tarkista_kirjavinkki_liian_lyhyella_kirjailijalla(self):
+    def test_lisaa_kirjavinkki_liian_lyhyella_kirjailijalla(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "", 2002, "kayttaja")
         self.assertEqual(
             virhe, "Kirjailijan nimen tulee sisältää ainakin kaksi merkkiä")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_not_called()
 
-    def test_tarkista_kirjavinkki_isoimmalla_kirjoitusvuodella(self):
+    def test_lisaa_kirjavinkki_isoimmalla_kirjoitusvuodella(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "2025", "kayttaja")
         self.assertEqual(virhe, "")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_called()
 
-    def test_tarkista_kirjavinkki_pienimmällä_kirjoitusvuodella(self):
+    def test_lisaa_kirjavinkki_pienimmällä_kirjoitusvuodella(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "1", "kayttaja")
         self.assertEqual(virhe, "")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_called()
 
-    def test_tarkista_kirjavinkki_liian_isolla_kirjoitusvuodella(self):
+    def test_lisaa_kirjavinkki_liian_isolla_kirjoitusvuodella(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "2026", "kayttaja")
         self.assertEqual(
             virhe, "Kirjoitusvuoden pitää olla numero väliltä 1-2025")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_not_called()
 
-    def test_tarkista_kirjavinkki_liian_isolla_kirjoitusvuodella(self):
+    def test_lisaa_kirjavinkki_liian_isolla_kirjoitusvuodella(self):
         virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
             "otsikko", "kirjailija", "0", "kayttaja")
         self.assertEqual(
             virhe, "Kirjoitusvuoden pitää olla numero väliltä 1-2025")
-        self.vinkki_repositorio_mock.tallenna_kirjavinkki.assert_not_called()
+
+    def test_lisaa_duplikaatti_kirjavinkki(self):
+        virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
+            "otsikko", "kirjailija", "2025", "kayttaja")
+        self.assertEqual(virhe, "")
+        virhe = self.kirjavinkki_service.lisaa_kirjavinkki(
+            "otsikko", "kirjailija", "2025", "kayttaja")
+        self.assertEqual(
+            virhe, "Olet jo lisännyt kirjavinkin samalla otsikolla")

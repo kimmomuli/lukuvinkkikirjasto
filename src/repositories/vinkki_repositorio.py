@@ -1,5 +1,7 @@
 from typing import List
 from datetime import datetime as dt
+from sqlalchemy.exc import IntegrityError
+from psycopg2.errors import UniqueViolation  # pylint: disable=no-name-in-module
 from database import database
 from entities.kirjavinkki import Kirjavinkki
 
@@ -17,33 +19,40 @@ class VinkkiRepositorio:
                 vinkki["otsikko"], vinkki["kirjailija"], vinkki["kirjoitusvuosi"], vinkki["tunnus"], vinkki["luontiaika"]))
         return kirjavinkit
 
-    def tallenna_kirjavinkki(self, kirjavinkki: Kirjavinkki):
-        sql = """INSERT INTO vinkit (tyyppi, otsikko, tekija, tunnus, luontiaika)
-                 VALUES (:tyyppi, :otsikko, :tekija, :tunnus, :luontiaika)"""
-        database.session.execute(
-            sql,
-            {
-                "tyyppi": "kirja",
-                "otsikko": kirjavinkki.otsikko,
-                "tekija": kirjavinkki.kirjailija,
-                "tunnus": kirjavinkki.omistaja,
-                "luontiaika": dt.now()
-            }
-        )
+    def tallenna_kirjavinkki(self, kirjavinkki: Kirjavinkki) -> bool:
+        try:
+            sql = """INSERT INTO vinkit (tyyppi, otsikko, tekija, tunnus, luontiaika)
+                     VALUES (:tyyppi, :otsikko, :tekija, :tunnus, :luontiaika)"""
+            database.session.execute(
+                sql,
+                {
+                    "tyyppi": "kirja",
+                    "otsikko": kirjavinkki.otsikko,
+                    "tekija": kirjavinkki.kirjailija,
+                    "tunnus": kirjavinkki.omistaja,
+                    "luontiaika": dt.now()
+                }
+            )
 
-        sql2 = """INSERT INTO kirjat (otsikko,kirjailija,kirjoitusvuosi)
-                  VALUES (:otsikko, :kirjailija, :kirjoitusvuosi) ON CONFLICT DO NOTHING"""
-        database.session.execute(
-            sql2,
-            {
-                "otsikko": kirjavinkki.otsikko,
-                "kirjailija": kirjavinkki.kirjailija,
-                "kirjoitusvuosi": kirjavinkki.kirjoitusvuosi
-            }
-        )
-        database.session.commit()
+            sql2 = """INSERT INTO kirjat (otsikko, kirjailija, kirjoitusvuosi)
+                      VALUES (:otsikko, :kirjailija, :kirjoitusvuosi) ON CONFLICT DO NOTHING"""
+            database.session.execute(
+                sql2,
+                {
+                    "otsikko": kirjavinkki.otsikko,
+                    "kirjailija": kirjavinkki.kirjailija,
+                    "kirjoitusvuosi": kirjavinkki.kirjoitusvuosi
+                }
+            )
+            database.session.commit()
+            return True
+        except IntegrityError as error:
+            # UNIQUE constraint fail
+            assert isinstance(error.orig, UniqueViolation)
+            database.session.rollback()
+            return False
 
-    def poista_kaikki(self):
+    def poista_kaikki(self) -> None:
         sql = "DELETE FROM kirjat;DELETE FROM vinkit"
         database.session.execute(sql)
         database.session.commit()

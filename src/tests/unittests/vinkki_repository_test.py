@@ -23,6 +23,12 @@ class TestVinkkiRepository(unittest.TestCase):
         vinkit = vinkki_repositorio.lataa_kirjat()
         self.assertEqual(len(vinkit), 2)
 
+    def test_saman_kirjavinkin_tallentaminen_monta_kertaa_epaonnistuu(self):
+        tulos = vinkki_repositorio.tallenna_kirjavinkki(self.kirjavinkki1)
+        self.assertTrue(tulos)
+        tulos = vinkki_repositorio.tallenna_kirjavinkki(self.kirjavinkki1)
+        self.assertFalse(tulos)
+
     def test_kayttajan_tiedot_loytyvat_ladatulta_vinkilta(self):
         vinkki_repositorio.tallenna_kirjavinkki(self.kirjavinkki1)
         vinkit = vinkki_repositorio.lataa_kirjat()
