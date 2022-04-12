@@ -6,12 +6,11 @@ from database import database
 from views import lukuvinkit, uusi_vinkki, kirjautuminen, rekisteroityminen
 
 
-def create_app(testing: bool = False):
+def create_app():
     app = Flask(__name__)
     app.secret_key = getenv("SECRET_KEY")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
-    app.config['TESTING'] = testing
 
     database.init_app(app)
 

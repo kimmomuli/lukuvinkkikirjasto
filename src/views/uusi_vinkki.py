@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, redirect, request, session, flash
-from repositories.vinkit import tallenna_kirjavinkki
-from services.kirjavinkki_service import tarkista_kirjavinkki
+from repositories.vinkit import vinkki_repositorio
+from services.kirjavinkki_service import kirjavinkki_service
 from entities.kirjavinkki import Kirjavinkki
 
 uusi_lukuvinkki_bp = Blueprint("uusi_lukuvinkki", __name__)
@@ -19,7 +19,8 @@ def luo_vinkki():
     kirjoitusvuosi = request.form["kirjoitusvuosi"]
     omistaja = session["username"]
 
-    virhe = tarkista_kirjavinkki(otsikko, kirjailija, kirjoitusvuosi)
+    virhe = kirjavinkki_service.tarkista_kirjavinkki(
+        otsikko, kirjailija, kirjoitusvuosi)
 
     if len(virhe) > 0:
         flash(virhe, "virhe")
@@ -29,6 +30,6 @@ def luo_vinkki():
         otsikko, kirjailija, kirjoitusvuosi, omistaja
     )
 
-    tallenna_kirjavinkki(kirjavinkki)
+    vinkki_repositorio.tallenna_kirjavinkki(kirjavinkki)
 
     return redirect("/")

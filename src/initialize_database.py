@@ -1,4 +1,8 @@
 from database import database
+from app import create_app
+
+app = create_app()
+app.app_context().push()
 
 
 def drop_tables():

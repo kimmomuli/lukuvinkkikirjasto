@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, redirect, request, session, flash
-from repositories.kayttajat import luo_kayttaja
+from repositories.kayttajat import kayttaja_repository
 
 rekisteroityminen_bp = Blueprint("rekisteroityminen", __name__)
 
@@ -14,7 +14,7 @@ def rekisteroidu():
     tunnus = request.form["tunnus"]
     salasana = request.form["salasana"]
 
-    virhe = luo_kayttaja(tunnus, salasana)
+    virhe = kayttaja_repository.luo_kayttaja(tunnus, salasana)
     if len(virhe) > 0:
         flash(virhe, "virhe")
         return redirect("/rekisteroityminen")
