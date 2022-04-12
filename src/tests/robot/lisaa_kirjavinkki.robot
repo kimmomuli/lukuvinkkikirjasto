@@ -2,23 +2,48 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Reset Database And Create User
+Test Setup  Reset Database And Create User And Log In And Go To Lisaa Page
 
 
 *** Test Cases ***
 Lisaa Vinkki Validilla Otsikolla Kirjailijalla Ja Vuodella
-    Go To Kirjautuminen Page
-    Set Kayttajatunnus  robotti
-    Set Salasana  robotti123
-    Submit Credentials
-    Click Link  Luo uusi vinkki
-    Lisaa Page Should Be Open
     Set Otsikko  Sinuhe egyptiläinen
     Set Kirjailija  Mika Waltari
     Set Kirjoitusvuosi  1945
     Lisaa Vinkki
     Home Page Should Be Open
 
+Lisaa Vinkki Liian Lyhyella Otsikolla
+    Set Otsikko  S
+    Set Kirjailija  Mika Waltari
+    Set Kirjoitusvuosi  1945
+    Lisaa Vinkki
+    Lisaa Page Should Be Open
+    Page Should Contain  Otsikon tulee sisältää ainakin kaksi merkkiä
+
+Lisaa Vinkki Liian Lyhyella Kirjailijan Nimella
+    Set Otsikko  Sinuhe egyptiläinen
+    Set Kirjailija  M
+    Set Kirjoitusvuosi  1945
+    Lisaa Vinkki
+    Lisaa Page Should Be Open
+    Page Should Contain  Kirjailijan nimen tulee sisältää ainakin kaksi merkkiä
+
+Lisaa Vinkki Liian Pienella Kirjoitusvuodella
+    Set Otsikko  Sinuhe egyptiläinen
+    Set Kirjailija  Mika Waltari
+    Set Kirjoitusvuosi  0
+    Lisaa Vinkki
+    Lisaa Page Should Be Open
+    Page Should Contain  Kirjoitusvuoden pitää olla numero väliltä 1-2025
+
+Lisaa Vinkki Liian Suurella Kirjoitusvuodella
+    Set Otsikko  Sinuhe egyptiläinen
+    Set Kirjailija  Mika Waltari
+    Set Kirjoitusvuosi  2026
+    Lisaa Vinkki
+    Lisaa Page Should Be Open
+    Page Should Contain  Kirjoitusvuoden pitää olla numero väliltä 1-2025
 
 *** Keywords ***
 Lisaa Vinkki
@@ -50,8 +75,16 @@ Set Salasana
     [Arguments]  ${salasana}
     Input Password  salasana  ${salasana}
 
-Reset Database And Create User
+Reset Database And Create User And Log In And Go To Lisaa Page
     Reset Application
     Create User  robotti  robotti123
+
     Go To Kirjautuminen Page
     Kirjautuminen Page Should Be Open
+    Set Kayttajatunnus  robotti
+    Set Salasana  robotti123
+    Submit Credentials
+    Home Page Should Be Open
+    
+    Click Link  Luo uusi vinkki
+    Lisaa Page Should Be Open
