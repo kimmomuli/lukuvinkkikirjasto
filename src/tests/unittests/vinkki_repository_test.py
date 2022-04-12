@@ -3,7 +3,7 @@ from repositories.vinkki_repositorio import vinkki_repositorio
 from entities.kirjavinkki import Kirjavinkki
 
 
-class TestVinkit(unittest.TestCase):
+class TestVinkkiRepository(unittest.TestCase):
     def setUp(self):
         vinkki_repositorio.poista_kaikki()
         self.kirjavinkki1 = Kirjavinkki(
