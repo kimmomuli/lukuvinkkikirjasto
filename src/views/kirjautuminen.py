@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, redirect, request, session, flash
-from repositories.kayttaja_repositorio import kayttaja_repository
+from services.kayttaja_service import kayttaja_service
 
 kirjautuminen_bp = Blueprint("kirjautuminen", __name__)
 
@@ -13,11 +13,12 @@ def kirjautuminen():
 def kirjaudu():
     tunnus = request.form["tunnus"]
     salasana = request.form["salasana"]
-    if kayttaja_repository.login(tunnus, salasana):
-        session["username"] = tunnus
-        return redirect("/")
-    flash("Väärä käyttäjätunnus tai salasana", "virhe")
-    return redirect("/kirjautuminen")
+    virhe = kayttaja_service.kirjaudu_sisaan(tunnus, salasana)
+    if virhe:
+        flash(virhe, "virhe")
+        return redirect("/kirjautuminen")
+    session["username"] = tunnus
+    return redirect("/")
 
 
 @kirjautuminen_bp.route("/kirjaudu_ulos")
