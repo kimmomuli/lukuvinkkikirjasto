@@ -19,17 +19,10 @@ def luo_vinkki():
     kirjoitusvuosi = request.form["kirjoitusvuosi"]
     omistaja = session["username"]
 
-    virhe = kirjavinkki_service.tarkista_kirjavinkki(
-        otsikko, kirjailija, kirjoitusvuosi)
+    virhe = kirjavinkki_service.lisaa_kirjavinkki(
+        otsikko, kirjailija, kirjoitusvuosi, omistaja)
 
-    if len(virhe) > 0:
+    if virhe:
         flash(virhe, "virhe")
         return render_template("uusi_vinkki.html")
-
-    kirjavinkki = Kirjavinkki(
-        otsikko, kirjailija, kirjoitusvuosi, omistaja
-    )
-
-    vinkki_repositorio.tallenna_kirjavinkki(kirjavinkki)
-
     return redirect("/")

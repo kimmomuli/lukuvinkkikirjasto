@@ -1,22 +1,27 @@
+from entities.kirjavinkki import Kirjavinkki
+from repositories.vinkki_repositorio import VinkkiRepositorio
+from repositories.vinkki_repositorio import vinkki_repositorio as default_vinkki_repositorio
+
+
 class KirjavinkkiService:
-    def tarkista_numeromuoto(self, numero: int) -> bool:
-        try:
-            numero = int(numero)
-            return True
-        except ValueError:
-            return False
+    def __init__(self, vinkki_repositorio: VinkkiRepositorio = default_vinkki_repositorio) -> None:
+        self.vinkki_repositorio = vinkki_repositorio
 
-    def tarkista_kirjavinkki(self, otsikko: str, kirjailija: str, kirjoitusvuosi: str) -> str:
-        if len(str(otsikko)) < 2:
+    def lisaa_kirjavinkki(self, otsikko: str, kirjailija: str, kirjoitusvuosi: str, omistaja: str) -> str:
+        if len(otsikko) < 2:
             return "Otsikon tulee sisältää ainakin kaksi merkkiä"
-
-        if len(str(kirjailija)) < 2:
+        if len(kirjailija) < 2:
             return "Kirjailijan nimen tulee sisältää ainakin kaksi merkkiä"
 
-        if not self.tarkista_numeromuoto(kirjoitusvuosi):
+        if not str.isdigit(kirjoitusvuosi):
             return "Kirjoitusvuoden pitää olla numero"
-        if not 1 < int(kirjoitusvuosi) < 2025:
+        if not 1 <= int(kirjoitusvuosi) <= 2025:
             return "Kirjoitusvuoden pitää olla numero väliltä 1-2025"
+
+        kirjavinkki = Kirjavinkki(
+            otsikko, kirjailija, kirjoitusvuosi, omistaja
+        )
+        self.vinkki_repositorio.tallenna_kirjavinkki(kirjavinkki)
 
         return ""
 
