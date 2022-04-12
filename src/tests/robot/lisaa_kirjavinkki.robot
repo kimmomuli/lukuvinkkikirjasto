@@ -47,12 +47,7 @@ Lisaa Vinkki Liian Suurella Kirjoitusvuodella
     Page Should Contain  Kirjoitusvuoden pitää olla numero väliltä 1-2025
 
 Lisaa Duplikaatti
-    Set Otsikko  Sinuhe egyptiläinen
-    Set Kirjailija  Mika Waltari
-    Set Kirjoitusvuosi  1945
-    Lisaa Vinkki
-    Home Page Should Be Open
-    Page Should Contain  Sinuhe egyptiläinen
+    Add Kirjavinkki And Go To Home Page  Sinuhe egyptiläinen  Mika Waltari  1945  robotti
 
     Go To Lisaa Page
     Set Otsikko  Sinuhe egyptiläinen
@@ -64,15 +59,6 @@ Lisaa Duplikaatti
 
 
 *** Keywords ***
-Lisaa Vinkki
-    Click Button  luo vinkki
-
-Submit Credentials
-    Click Button  Kirjaudu
-
-Lisays Should Succeed
-    Home Page Should Be Open
-
 Set Otsikko
     [Arguments]  ${otsikko}
     Input Text  otsikko  ${otsikko}
@@ -85,16 +71,11 @@ Set Kirjoitusvuosi
     [Arguments]  ${kirjoitusvuosi}
     Input Text  kirjoitusvuosi  ${kirjoitusvuosi}
 
-Set Kayttajatunnus
-    [Arguments]  ${kayttajatunnus}
-    Input Text  tunnus  ${kayttajatunnus}
-
-Set Salasana
-    [Arguments]  ${salasana}
-    Input Password  salasana  ${salasana}
+Lisaa Vinkki
+    Click Button  luo vinkki
 
 Reset Database And Create User And Log In And Go To Lisaa Page
     Reset Application
-    Create User And Log In
+    Create User And Log In  robotti  robotti123
     Click Link  Luo uusi vinkki
     Lisaa Page Should Be Open

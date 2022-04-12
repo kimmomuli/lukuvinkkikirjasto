@@ -49,3 +49,17 @@ class TestVinkkiRepository(unittest.TestCase):
         vinkki_repositorio.tallenna_kirjavinkki(karamazov2)
         vinkit = vinkki_repositorio.lataa_kirjat()
         self.assertEqual(len(vinkit), 2)
+
+    def test_vinkin_poistaminen(self):
+        vinkki_repositorio.tallenna_kirjavinkki(self.kirjavinkki1)
+        vinkki_repositorio.tallenna_kirjavinkki(self.kirjavinkki2)
+        vinkki_repositorio.poista_vinkki(self.kirjavinkki1)
+        vinkit = vinkki_repositorio.lataa_kirjat()
+        self.assertEqual(len(vinkit), 1)
+        self.assertEqual(vinkit[0].otsikko, self.kirjavinkki2.otsikko)
+
+    def test_olemattoman_vinkin_poistaminen(self):
+        vinkki_repositorio.tallenna_kirjavinkki(self.kirjavinkki1)
+        vinkki_repositorio.poista_vinkki(self.kirjavinkki2)
+        vinkit = vinkki_repositorio.lataa_kirjat()
+        self.assertEqual(len(vinkit), 1)

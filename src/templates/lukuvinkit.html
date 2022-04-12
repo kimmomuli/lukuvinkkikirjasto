@@ -39,6 +39,12 @@
         </tbody>
     </table>
     {% endif %}
+
+    {% if vinkki.omistaja == session.username %}
+    <form method="POST">
+        <input type="submit" name="delete_{{vinkki.tyyppi}}_{{vinkki.otsikko}}" value="Poista" />
+    </form>
+    {% endif %}
 </div>
 {% endfor %}
 

@@ -17,3 +17,13 @@ class AppLibrary:
         }
 
         requests.post(f"{self._base_url}/rekisteroityminen", data=data)
+
+    def lisaa_kirjavinkki(self, otsikko: str, kirjailija: str, kirjoitusvuosi: str, omistaja: str) -> None:
+        data = {
+            "otsikko": otsikko,
+            "kirjailija": kirjailija,
+            "kirjoitusvuosi": kirjoitusvuosi,
+            "omistaja": omistaja
+        }
+
+        requests.post(f"{self._base_url}/tests/lisaa_kirjavinkki", json=data)

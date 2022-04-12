@@ -53,12 +53,15 @@ class VinkkiRepositorio:
             return False
 
     def poista_kaikki(self) -> None:
-        sql = "DELETE FROM kirjat;DELETE FROM vinkit"
+        sql = "DELETE FROM kirjat; DELETE FROM vinkit"
         database.session.execute(sql)
         database.session.commit()
 
-    # def poista_vinkki(self, vinkki):
-    #    pass
+    def poista_vinkki(self, vinkki: Kirjavinkki) -> None:
+        sql = "DELETE FROM vinkit WHERE otsikko = :otsikko AND tunnus = :tunnus"
+        database.session.execute(
+            sql, {"otsikko": vinkki.otsikko, "tunnus": vinkki.omistaja})
+        database.session.commit()
 
 
 vinkki_repositorio = VinkkiRepositorio()

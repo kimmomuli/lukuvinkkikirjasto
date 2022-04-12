@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Open Register Page
+Test Setup  Reset Database And Open Register Page
 
 
 *** Test Cases ***
@@ -66,21 +66,12 @@ Luo Uusi Vinkki Linkki Ei Ole Nakyvissa Jos Kayttaja Ei Ole Kirjautunut Sisaan
     Page Should Not Contain  Luo Uusi Vinkki
 
 Luo Uusi Vinkki Linkki On Nakyvissa Jos Kayttaja On Kirjautunut Sisaan
-    Create User And Log In
+    Create User And Log In  robotti  robotti123
     Page Should Contain  Luo uusi vinkki
 
 *** Keywords ***
-Lisaa Vinkki
-    Click Button  luo vinkki
-
 Log Out
     Click Link  Kirjaudu ulos
-
-Submit Login Credentials
-    Click Button  Kirjaudu
-
-Submit Register Credentials
-    Click Button  Rekisteröidy
 
 Set Kayttajatunnus
     [Arguments]  ${kayttajatunnus}
@@ -90,7 +81,13 @@ Set Salasana
     [Arguments]  ${salasana}
     Input Password  salasana  ${salasana}
 
-Open Register Page
+Submit Login Credentials
+    Click Button  Kirjaudu
+
+Submit Register Credentials
+    Click Button  Rekisteröidy
+
+Reset Database And Open Register Page
     Reset Application
     Go To Rekisteroityminen Page
     Rekisteroityminen Page Should Be Open

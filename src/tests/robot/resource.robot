@@ -18,15 +18,6 @@ Open And Configure Browser
     Maximize Browser Window
     Set Selenium Speed  ${DELAY}
 
-Create User And Log In
-    Create User  robotti  robotti123
-    Go To Kirjautuminen Page
-    Kirjautuminen Page Should Be Open
-    Input Text  tunnus  robotti
-    Input Text  salasana  robotti123
-    Click Button  Kirjaudu
-    Home Page Should Be Open
-
 Home Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Lukuvinkit
 
@@ -50,3 +41,20 @@ Go To Kirjautuminen Page
 
 Go To Lisaa Page
     Go To  ${LISAA URL}
+
+Create User And Log In
+    [Arguments]  ${kayttajatunnus}  ${salasana}
+    Create User  ${kayttajatunnus}  ${salasana}
+    Go To Kirjautuminen Page
+    Kirjautuminen Page Should Be Open
+    Input Text  tunnus  ${kayttajatunnus}
+    Input Text  salasana  ${salasana}
+    Click Button  Kirjaudu
+    Home Page Should Be Open
+
+Add Kirjavinkki And Go To Home Page
+    [Arguments]  ${otsikko}  ${kirjailija}  ${kirjoitusvuosi}  ${lisaaja}
+    Lisaa Kirjavinkki  ${otsikko}  ${kirjailija}  ${kirjoitusvuosi}  ${lisaaja}
+    Go To Home Page
+    Home Page Should Be Open
+    Page Should Contain  ${otsikko}

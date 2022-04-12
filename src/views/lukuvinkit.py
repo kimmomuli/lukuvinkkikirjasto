@@ -1,10 +1,15 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 from repositories.vinkki_repositorio import vinkki_repositorio
 
 lukuvinkit_bp = Blueprint("lukuvinkit", __name__)
 
 
-@lukuvinkit_bp.route("/")
+@lukuvinkit_bp.route("/", methods=["GET", "POST"])
 def lukuvinkit():
     vinkit = vinkki_repositorio.lataa_kirjat()
+    if request.method == "POST":
+        for vinkki in vinkit:
+            if request.form.get(f"delete_{vinkki.tyyppi}_{vinkki.otsikko}"):
+                vinkki_repositorio.poista_vinkki(vinkki)
+        vinkit = vinkki_repositorio.lataa_kirjat()
     return render_template("lukuvinkit.html", vinkit=vinkit)
