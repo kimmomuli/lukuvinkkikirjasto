@@ -5,7 +5,8 @@
 
 [Linkki sovellukseen](https://lukuvinkkikirjasto2.herokuapp.com/)
 
-## Asennusohjeet
+## Ohjelman ajaminen
+#### Ohjelman alustaminen
 1. Luo `.env` tiedosto projektin juureen ja lisää seuraavat rivit sinne
     ```
     SECRET_KEY=<secret_key>
@@ -20,45 +21,43 @@
     <pitkä satunnainen merkkijono>
     ```
 
-2. Asenna riippuvuudet
+2. Asenna riippuvuudet ja alusta tietokanta
     ```
     $ poetry install
+    $ poetry run invoke initialize-database
     ```
-3. Alusta tietokanta
-   ```
-   $ poetry run invoke initialize-database
-   ```
 
-## Projektin ajaminen
+#### Ohjelman ajaminen
 ```
 $ poetry run invoke start
 ```
 
 ## Testien ajaminen
-1. Luo `.env.test` tiedosto projektin juureen ja lisää seuraa rivi sinne
-    ```
-    DATABASE_URL=<postgresql:///testi_tietokannan_nimi>
-    ```
-    Missä `<postgresql:///testi_tietokannan_nimi>` on testeissä käytettävän tietokannan osoite.  
-2. Aja testit
-    ```
-    $ poetry run invoke test
-    ```
+#### Testien alustaminen
+Luo `.env.test` tiedosto projektin juureen ja lisää seuraa rivi sinne
+```
+DATABASE_URL=<postgresql:///testi_tietokannan_nimi>
+```
+Missä `<postgresql:///testi_tietokannan_nimi>` on testeissä käytettävän tietokannan osoite.
 
-## Testien kattavuusraportin luominen
+#### Yksikkötestien ajaminen
+```
+$ poetry run invoke test
+```
+
+#### Yksikkötestien kattavuusraportin luominen
 ```
 $ poetry run invoke coverage-report
 ```
 
-## Hyväksymistestien ajaminen
+#### Hyväksymistestien ajaminen
 ```
 $ poetry run invoke robot
 ```
 
-## Pylint
-
+#### Pylintin ajaminen
 ```
-poetry run invoke lint
+$ poetry run invoke lint
 ```
 
 ## Backlogs ja burndown
@@ -67,4 +66,4 @@ poetry run invoke lint
 <img src="https://user-images.githubusercontent.com/80842633/161778761-6f1b80e4-c75d-4a54-beff-cd797fe3de0c.png" width="600">
 
 ## DoD
-![Definition of done ](https://github.com/kimmomuli/Lukuvinkkikirjasto/blob/main/dokumentaatio/definiton_of_done.md)
+![Definition of done](https://github.com/kimmomuli/Lukuvinkkikirjasto/blob/main/dokumentaatio/definiton_of_done.md)
