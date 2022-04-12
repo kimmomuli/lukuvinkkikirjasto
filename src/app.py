@@ -1,3 +1,4 @@
+import logging
 from os import getenv
 from flask import Flask
 from flask import session  # pylint: disable=unused-import
@@ -19,5 +20,6 @@ def create_app():
     app.register_blueprint(kirjautuminen.kirjautuminen_bp)
     app.register_blueprint(rekisteroityminen.rekisteroityminen_bp)
     if ENV == "testing":
+        logging.getLogger('werkzeug').setLevel(logging.ERROR)
         app.register_blueprint(tests.tests_bp)
     return app
