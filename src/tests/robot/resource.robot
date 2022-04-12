@@ -18,6 +18,15 @@ Open And Configure Browser
     Maximize Browser Window
     Set Selenium Speed  ${DELAY}
 
+Create User And Log In
+    Create User  robotti  robotti123
+    Go To Kirjautuminen Page
+    Kirjautuminen Page Should Be Open
+    Input Text  tunnus  robotti
+    Input Text  salasana  robotti123
+    Click Button  Kirjaudu
+    Home Page Should Be Open
+
 Home Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Lukuvinkit
 

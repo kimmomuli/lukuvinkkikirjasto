@@ -61,6 +61,13 @@ Kirjaudu Sisaan vaaralla salasanalla
     Kirjautuminen Page Should Be Open
     Page Should contain  Väärä käyttäjätunnus tai salasana
 
+Luo Uusi Vinkki Linkki Ei Ole Nakyvissa Jos Kayttaja Ei Ole Kirjautunut Sisaan
+    Go To Home Page
+    Page Should Not Contain  Luo Uusi Vinkki
+
+Luo Uusi Vinkki Linkki On Nakyvissa Jos Kayttaja On Kirjautunut Sisaan
+    Create User And Log In
+    Page Should Contain  Luo uusi vinkki
 
 *** Keywords ***
 Lisaa Vinkki

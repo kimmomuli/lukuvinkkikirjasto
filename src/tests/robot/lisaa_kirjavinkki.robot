@@ -77,14 +77,6 @@ Set Salasana
 
 Reset Database And Create User And Log In And Go To Lisaa Page
     Reset Application
-    Create User  robotti  robotti123
-
-    Go To Kirjautuminen Page
-    Kirjautuminen Page Should Be Open
-    Set Kayttajatunnus  robotti
-    Set Salasana  robotti123
-    Submit Credentials
-    Home Page Should Be Open
-    
+    Create User And Log In
     Click Link  Luo uusi vinkki
     Lisaa Page Should Be Open
