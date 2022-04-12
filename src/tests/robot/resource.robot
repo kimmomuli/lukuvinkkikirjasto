@@ -42,6 +42,10 @@ Go To Kirjautuminen Page
 Go To Lisaa Page
     Go To  ${LISAA URL}
 
+Reset Application And Delete Cookies
+    Reset Application
+    Delete All Cookies
+
 Create User And Log In
     [Arguments]  ${kayttajatunnus}  ${salasana}
     Create User  ${kayttajatunnus}  ${salasana}

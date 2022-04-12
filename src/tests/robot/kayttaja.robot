@@ -69,6 +69,11 @@ Luo Uusi Vinkki Linkki On Nakyvissa Jos Kayttaja On Kirjautunut Sisaan
     Create User And Log In  robotti  robotti123
     Page Should Contain  Luo uusi vinkki
 
+Avaa Luo uusi Vinkki Kun Kayttaja Ei Ole Kirjautuneena
+    Go To Lisaa Page
+    Kirjautuminen Page Should Be Open
+    Page Should Contain  Sinun pitää olla kirjautuneena jotta voit lisätä uuden vinkin
+
 *** Keywords ***
 Log Out
     Click Link  Kirjaudu ulos
@@ -88,6 +93,6 @@ Submit Register Credentials
     Click Button  Rekisteröidy
 
 Reset Database And Open Register Page
-    Reset Application
+    Reset Application And Delete Cookies
     Go To Rekisteroityminen Page
     Rekisteroityminen Page Should Be Open

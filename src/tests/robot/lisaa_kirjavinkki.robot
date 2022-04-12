@@ -75,7 +75,7 @@ Lisaa Vinkki
     Click Button  luo vinkki
 
 Reset Database And Create User And Log In And Go To Lisaa Page
-    Reset Application
+    Reset Application And Delete Cookies
     Create User And Log In  robotti  robotti123
     Click Link  Luo uusi vinkki
     Lisaa Page Should Be Open

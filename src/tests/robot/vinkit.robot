@@ -40,6 +40,6 @@ Lisaa Vinkki
     Click Button  luo vinkki
 
 Reset Database And Create User And Log In And Add Kirjavinkki And Go To Home Page
-    Reset Application
+    Reset Application And Delete Cookies
     Create User And Log In  robotti  robotti123
     Add Kirjavinkki And Go To Home Page  Sinuhe egyptiläinen  Mika Waltari  1945  robotti

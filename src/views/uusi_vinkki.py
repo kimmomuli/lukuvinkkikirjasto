@@ -6,6 +6,11 @@ uusi_lukuvinkki_bp = Blueprint("uusi_lukuvinkki", __name__)
 
 @uusi_lukuvinkki_bp.route("/uusi_vinkki", methods=["GET", "POST"])
 def uusi_vinkki():
+    if "username" not in session:
+        flash(
+            "Sinun pitää olla kirjautuneena jotta voit lisätä uuden vinkin", "virhe")
+        return redirect("/kirjautuminen")
+
     otsikko = ""
     kirjailija = ""
     kirjoitusvuosi = ""
