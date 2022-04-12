@@ -5,6 +5,7 @@ omit =
     src/config.py
     src/database.py
     src/initialize_database.py
+    src/AppLibrary.py
     src/**/__init__.py
     src/tests/**
     src/views/**
