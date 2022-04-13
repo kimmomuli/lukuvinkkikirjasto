@@ -66,5 +66,7 @@ $ poetry run invoke lint
 
 <img src="https://user-images.githubusercontent.com/80842633/161778761-6f1b80e4-c75d-4a54-beff-cd797fe3de0c.png" width="600">
 
+[Sprint 2 burndown](https://docs.google.com/spreadsheets/d/1oUD3PLRMS-RZCElSi6i3RGb_GPnDkrkrngseGRm9Du0/edit#gid=0)
+
 ## DoD
 ![Definition of done](https://github.com/kimmomuli/Lukuvinkkikirjasto/blob/main/dokumentaatio/definiton_of_done.md)
