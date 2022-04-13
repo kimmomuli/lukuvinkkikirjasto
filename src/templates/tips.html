@@ -6,49 +6,49 @@
 
 <hr />
 {% if session.username %}
-<a href="/uusi_vinkki">Luo uusi vinkki</a>
-<a href="/kirjaudu_ulos">Kirjaudu ulos</a>
+<a href="/new_tip">Luo uusi vinkki</a>
+<a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<a href="/kirjautuminen">Kirjaudu</a>
+<a href="/login">Kirjaudu</a>
 {% endif %}
 
-{% for vinkki in vinkit %}
+{% for tip in tips %}
 <hr />
 <div>
-    <h4>{{vinkki.otsikko}}</h4>
+    <h4>{{tip.title}}</h4>
 
-    {% if vinkki.tyyppi == "kirja" %}
+    {% if tip.type == "book" %}
     <table>
         <tbody>
             <tr>
                 <td>Kirjailija</td>
-                <td>{{vinkki.kirjailija}}</td>
+                <td>{{tip.author}}</td>
             </tr>
             <tr>
                 <td>kirjoitusvuosi</td>
-                <td>{{vinkki.kirjoitusvuosi}}</td>
+                <td>{{tip.year}}</td>
             </tr>
             <tr>
                 <td>vinkin lisääjä</td>
-                <td>{{vinkki.omistaja}}</td>
+                <td>{{tip.adder_username}}</td>
             </tr>
             <tr>
                 <td>Luontiaika</td>
-                <td>{{vinkki.aikaleima.strftime("%H:%M / %d-%m-%Y") }}</td>
+                <td>{{tip.timestamp.strftime("%H:%M %d.%m.%Y") }}</td>
             </tr>
         </tbody>
     </table>
     {% endif %}
 
-    {% if vinkki.omistaja == session.username %}
+    {% if tip.adder_username == session.username %}
     <form method="POST">
-        <input type="submit" name="delete_{{vinkki.tyyppi}}_{{vinkki.otsikko}}" value="Poista" />
+        <input type="submit" name="delete_{{tip.type}}_{{tip.title}}" value="Poista" />
     </form>
     {% endif %}
 </div>
 {% endfor %}
 
-{% if vinkit | length > 0 %}
+{% if tips | length > 0 %}
 <hr />
 {% endif %}
 

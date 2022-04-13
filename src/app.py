@@ -4,7 +4,7 @@ from flask import Flask
 from flask import session  # pylint: disable=unused-import
 from config import DATABASE_URL, ENV
 from database import database
-from views import lukuvinkit, uusi_vinkki, kirjautuminen, rekisteroityminen, tests
+from views import login, new_tip, register, tips, tests
 
 
 def create_app():
@@ -15,10 +15,10 @@ def create_app():
 
     database.init_app(app)
 
-    app.register_blueprint(lukuvinkit.lukuvinkit_bp)
-    app.register_blueprint(uusi_vinkki.uusi_lukuvinkki_bp)
-    app.register_blueprint(kirjautuminen.kirjautuminen_bp)
-    app.register_blueprint(rekisteroityminen.rekisteroityminen_bp)
+    app.register_blueprint(tips.tips_bp)
+    app.register_blueprint(new_tip.new_tip_bp)
+    app.register_blueprint(login.login_bp)
+    app.register_blueprint(register.register_bp)
     if ENV == "testing":
         logging.getLogger('werkzeug').setLevel(logging.ERROR)
         app.register_blueprint(tests.tests_bp)

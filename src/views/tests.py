@@ -1,24 +1,23 @@
 from flask import Blueprint, request
-from repositories.kayttaja_repositorio import kayttaja_repository
-from repositories.vinkki_repositorio import vinkki_repositorio
-from services.kirjavinkki_service import kirjavinkki_service
+from repositories.user_repository import user_repository
+from repositories.tip_repository import tip_repository
+from services.book_tip_service import book_tip_service
 
 tests_bp = Blueprint("test", __name__)
 
 
 @tests_bp.route("/tests/reset", methods=["POST"])
 def reset():
-    kayttaja_repository.poista_kaikki()
-    vinkki_repositorio.poista_kaikki()
+    user_repository.delete_all()
+    tip_repository.delete_all()
     return "ok"
 
 
-@tests_bp.route("/tests/lisaa_kirjavinkki", methods=["POST"])
-def lisaa_kirjavinkki():
-    otsikko = request.json["otsikko"]
-    kirjailija = request.json["kirjailija"]
-    kirjoitusvuosi = request.json["kirjoitusvuosi"]
-    omistaja = request.json["omistaja"]
-    kirjavinkki_service.lisaa_kirjavinkki(
-        otsikko, kirjailija, kirjoitusvuosi, omistaja)
+@tests_bp.route("/tests/add_book_tip", methods=["POST"])
+def add_book_tip():
+    title = request.json["title"]
+    author = request.json["author"]
+    year = request.json["year"]
+    adder_username = request.json["adder_username"]
+    book_tip_service.add_book_tip(title, author, year, adder_username)
     return "ok"

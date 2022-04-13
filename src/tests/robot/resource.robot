@@ -8,9 +8,9 @@ ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
 ${DELAY}  0 seconds
 ${HOME URL}  http://${SERVER}
-${LISAA URL}  http://${SERVER}/uusi_vinkki
-${REKISTEROITYMINEN URL}  http://${SERVER}/rekisteroityminen
-${KIRJAUTUMINEN URL}  http://${SERVER}/kirjautuminen
+${NEW_TIP_URL}  http://${SERVER}/new_tip
+${REGISTER_URL}  http://${SERVER}/register
+${LOGIN_URL}  http://${SERVER}/login
 
 *** Keywords ***
 Open And Configure Browser
@@ -18,47 +18,56 @@ Open And Configure Browser
     Maximize Browser Window
     Set Selenium Speed  ${DELAY}
 
+
 Home Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Lukuvinkit
 
-Rekisteroityminen Page Should Be Open
+Register Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Rekisteröidy
 
-Kirjautuminen Page Should Be Open
+Login Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Kirjaudu sisään
 
-Lisaa Page Should Be Open
+New Tip Page Should Be Open
     Title Should Be  Lukuvinkkisovellus - Luo lukuvinkki
 
 Go To Home Page
     Go To  ${HOME URL}
 
-Go To Rekisteroityminen Page
-    Go To  ${REKISTEROITYMINEN URL}
+Go To Register Page
+    Go To  ${REGISTER_URL}
 
-Go To Kirjautuminen Page
-    Go To  ${KIRJAUTUMINEN URL}
+Go To Login Page
+    Go To  ${LOGIN_URL}
 
-Go To Lisaa Page
-    Go To  ${LISAA URL}
+Go To New Tip Page
+    Go To  ${NEW_TIP_URL}
+
 
 Reset Application And Delete Cookies
     Reset Application
     Delete All Cookies
 
+Page Should Contain Book Tip
+    [Arguments]  ${title}  ${author}  ${year}  ${adder_username}
+    Page Should Contain  ${title}
+    Page Should Contain  ${author}
+    Page Should Contain  ${year}
+    Page Should Contain  ${adder_username}
+
 Create User And Log In
-    [Arguments]  ${kayttajatunnus}  ${salasana}
-    Create User  ${kayttajatunnus}  ${salasana}
-    Go To Kirjautuminen Page
-    Kirjautuminen Page Should Be Open
-    Input Text  tunnus  ${kayttajatunnus}
-    Input Text  salasana  ${salasana}
+    [Arguments]  ${username}  ${password}
+    Create User  ${username}  ${password}
+    Go To Login Page
+    Login Page Should Be Open
+    Input Text  username  ${username}
+    Input Text  password  ${password}
     Click Button  Kirjaudu
     Home Page Should Be Open
 
-Add Kirjavinkki And Go To Home Page
-    [Arguments]  ${otsikko}  ${kirjailija}  ${kirjoitusvuosi}  ${lisaaja}
-    Lisaa Kirjavinkki  ${otsikko}  ${kirjailija}  ${kirjoitusvuosi}  ${lisaaja}
+Add Book Tip And Go To Home Page
+    [Arguments]  ${title}  ${author}  ${year}  ${adder_username}
+    Add Book Tip  ${title}  ${author}  ${year}  ${adder_username}
     Go To Home Page
     Home Page Should Be Open
-    Page Should Contain  ${otsikko}
+    Page Should Contain Book Tip  ${title}  ${author}  ${year}  ${adder_username}

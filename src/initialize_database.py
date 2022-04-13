@@ -6,7 +6,7 @@ app.app_context().push()
 
 
 def drop_tables():
-    sql = "DROP TABLE IF EXISTS kayttajat, vinkit, kirjat"
+    sql = "DROP TABLE IF EXISTS kayttajat, vinkit, kirjat, users, tips, book_tips"
     database.session.execute(sql)
     database.session.commit()
 

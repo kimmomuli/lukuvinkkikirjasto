@@ -10,20 +10,20 @@ class AppLibrary:
     def reset_application(self) -> None:
         requests.post(f"{self._base_url}/tests/reset")
 
-    def create_user(self, kayttajatunnus: str, salasana: str) -> None:
+    def create_user(self, username: str, password: str) -> None:
         data = {
-            "tunnus": kayttajatunnus,
-            "salasana": salasana,
+            "username": username,
+            "password": password,
         }
 
-        requests.post(f"{self._base_url}/rekisteroityminen", data=data)
+        requests.post(f"{self._base_url}/register", data=data)
 
-    def lisaa_kirjavinkki(self, otsikko: str, kirjailija: str, kirjoitusvuosi: str, omistaja: str) -> None:
+    def add_book_tip(self, title: str, author: str, year: str, adder_username: str) -> None:
         data = {
-            "otsikko": otsikko,
-            "kirjailija": kirjailija,
-            "kirjoitusvuosi": kirjoitusvuosi,
-            "omistaja": omistaja
+            "title": title,
+            "author": author,
+            "year": year,
+            "adder_username": adder_username
         }
 
-        requests.post(f"{self._base_url}/tests/lisaa_kirjavinkki", json=data)
+        requests.post(f"{self._base_url}/tests/add_book_tip", json=data)
