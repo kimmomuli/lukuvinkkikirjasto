@@ -10,3 +10,13 @@ class BookTip:
         self.adder_username = adder_username
         self.type = "book"
         self.timestamp = timestamp
+
+    def __eq__(self, other: "BookTip") -> bool:
+        return (self.title == other.title
+                and self.author == other.author
+                and self.year == other.year
+                and self.adder_username == other.adder_username
+                and self.type == other.type)
+
+    def __hash__(self):
+        return hash((self.title, self.author, self.year, self.adder_username, self.type))

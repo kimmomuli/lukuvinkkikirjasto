@@ -12,14 +12,13 @@ class TestTipRepository(unittest.TestCase):
     def test_after_adding_book_tip_it_is_saved_to_database(self):
         tip_repository.add_book_tip(self.book_tip1)
         tips = tip_repository.get_all_book_tips()
-        self.assertEqual(tips[0].title, self.book_tip1.title)
-        self.assertEqual(tips[0].adder_username, self.book_tip1.adder_username)
+        self.assertEqual(tips[0], self.book_tip1)
 
     def test_adding_multiple_book_tips(self):
         tip_repository.add_book_tip(self.book_tip1)
         tip_repository.add_book_tip(self.book_tip2)
         tips = tip_repository.get_all_book_tips()
-        self.assertEqual(len(tips), 2)
+        self.assertCountEqual(tips, [self.book_tip1, self.book_tip2])
 
     def test_adding_same_tip_multiple_times_fails(self):
         result = tip_repository.add_book_tip(self.book_tip1)
@@ -31,7 +30,7 @@ class TestTipRepository(unittest.TestCase):
         tip_repository.add_book_tip(self.book_tip1)
         tip_repository.add_book_tip(self.book_tip2)
         tips = tip_repository.get_all_book_tips()
-        self.assertEqual(tips[0].title, self.book_tip2.title)
+        self.assertEqual(tips[0], self.book_tip2)
 
     def test_two_users_can_add_the_same_book_tip(self):
         book_tip1 = BookTip("title", "author", 1880, "username1")
@@ -39,18 +38,17 @@ class TestTipRepository(unittest.TestCase):
         tip_repository.add_book_tip(book_tip1)
         tip_repository.add_book_tip(book_tip2)
         tips = tip_repository.get_all_book_tips()
-        self.assertEqual(len(tips), 2)
+        self.assertCountEqual(tips, [book_tip1, book_tip2])
 
     def test_deleting_tip(self):
         tip_repository.add_book_tip(self.book_tip1)
         tip_repository.add_book_tip(self.book_tip2)
         tip_repository.delete_tip(self.book_tip1)
         tips = tip_repository.get_all_book_tips()
-        self.assertEqual(len(tips), 1)
-        self.assertEqual(tips[0].title, self.book_tip2.title)
+        self.assertCountEqual(tips, [self.book_tip2])
 
     def test_deleting_nonexistent_tip(self):
         tip_repository.add_book_tip(self.book_tip1)
         tip_repository.delete_tip(self.book_tip2)
         tips = tip_repository.get_all_book_tips()
-        self.assertEqual(len(tips), 1)
+        self.assertCountEqual(tips, [self.book_tip1])
