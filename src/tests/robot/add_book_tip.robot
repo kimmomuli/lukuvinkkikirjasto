@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Reset Database And Create User And Log In And Go To New Tip Page
+Test Setup  Reset Database, Create User, Log In And Go To New Tip Page
 
 
 *** Test Cases ***
@@ -74,7 +74,7 @@ Set Year
 Submit Book Tip
     Click Button  luo vinkki
 
-Reset Database And Create User And Log In And Go To New Tip Page
+Reset Database, Create User, Log In And Go To New Tip Page
     Reset Application And Delete Cookies
     Create User And Log In  robotti  robotti123
     Click Link  Luo uusi vinkki
