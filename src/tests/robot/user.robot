@@ -63,7 +63,7 @@ Log In With Wrong Password
 
 Create New Tip Link Is Not Visible If Not Logged In
     Go To Home Page
-    Page Should Not Contain  Luo Uusi Vinkki
+    Page Should Not Contain  Luo uusi Vinkki
 
 Create New Tip Link Is Visible If Logged In
     Create User And Log In  robot  robot123

@@ -2,11 +2,36 @@
 
 <head>
     <title>Lukuvinkkisovellus - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
-    <!-- virheilmoitukset -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <a class="navbar-brand" href="/">Lukuvinkkisovellus</a>
+
+        <ul class="navbar-nav">
+            {% if session.username %}
+            <li class="nav-item">
+                <a class="nav-link" href="/new_tip">Luo uusi vinkki</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Kirjaudu ulos</a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Kirjaudu sisään</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Luo tunnus</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Notifications -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <h2>Virheet:</h2>
