@@ -16,10 +16,22 @@ class TipRepository:
         book_tips = []
         for tip in tips:
             book_tips.append(BookTip(
-                tip["title"], tip["author"], tip["year"], tip["adder_username"], tip["timestamp"]
+                tip["title"], tip["author"], tip["year"], tip["adder_username"], tip["timestamp"], self.get_tip_likes(
+                    "Book", tip["title"], tip["author"])
             ))
 
         return book_tips
+
+    def get_tip_likes(self, type: str, title: str, author: str) -> List[str]:
+        sql = "SELECT username FROM likes WHERE type = :type AND title = :title AND author = :author"
+
+        return database.session.execute(sql,
+                                        {
+                                            "type": type,
+                                            "title": title,
+                                            "author": author
+                                        }
+                                        ).fetchall()
 
     def add_book_tip(self, book_tip: BookTip) -> bool:
         try:
@@ -47,6 +59,23 @@ class TipRepository:
                     "year": book_tip.year
                 }
             )
+            database.session.commit()
+            return True
+        except IntegrityError as error:
+            # UNIQUE constraint fail
+            assert isinstance(error.orig, UniqueViolation)
+            database.session.rollback()
+            return False
+
+    def add_like(self, book_tip: BookTip, username: str) -> bool:
+        sql = "INSERT INTO likes (type,title,author,username) VALUES (:type,:title,:author,:username)"
+        try:
+            database.session.execute(sql, {
+                "type": "Book",
+                "title": book_tip.title,
+                "author": book_tip.author,
+                "username": username
+            })
             database.session.commit()
             return True
         except IntegrityError as error:

@@ -17,3 +17,10 @@ CREATE TABLE book_tips (
     year INTEGER,
     PRIMARY KEY (title, author)
 );
+CREATE TABLE likes (
+    type TEXT,
+    title TEXT,
+    author TEXT,
+    username TEXT,
+    PRIMARY KEY(type,title,author,username)
+)

@@ -3,13 +3,14 @@ from typing import Optional
 
 class BookTip:
     def __init__(self, title: str, author: str, year: int,
-                 adder_username: str, timestamp: Optional[str] = None) -> None:
+                 adder_username: str, timestamp: Optional[str] = None, likes=[]) -> None:
         self.title = title
         self.author = author
         self.year = year
         self.adder_username = adder_username
         self.type = "book"
         self.timestamp = timestamp
+        self.likes = likes
 
     def __eq__(self, other: "BookTip") -> bool:
         return (self.title == other.title
