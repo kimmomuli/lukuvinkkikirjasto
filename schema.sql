@@ -23,4 +23,4 @@ CREATE TABLE likes (
     author TEXT,
     username TEXT,
     PRIMARY KEY(type,title,author,username)
-)
+);

@@ -25,13 +25,14 @@ class TipRepository:
     def get_tip_likes(self, type: str, title: str, author: str) -> List[str]:
         sql = "SELECT username FROM likes WHERE type = :type AND title = :title AND author = :author"
 
-        return database.session.execute(sql,
-                                        {
-                                            "type": type,
-                                            "title": title,
-                                            "author": author
-                                        }
-                                        ).fetchall()
+        likes = database.session.execute(sql,
+                                         {
+                                             "type": type,
+                                             "title": title,
+                                             "author": author
+                                         }
+                                         ).fetchall()
+        return likes[0] if len(likes) > 0 else []
 
     def add_book_tip(self, book_tip: BookTip) -> bool:
         try:
@@ -67,13 +68,31 @@ class TipRepository:
             database.session.rollback()
             return False
 
-    def add_like(self, book_tip: BookTip, username: str) -> bool:
+    def add_like(self, book_title: str, book_author: str, username: str) -> bool:
         sql = "INSERT INTO likes (type,title,author,username) VALUES (:type,:title,:author,:username)"
         try:
             database.session.execute(sql, {
                 "type": "Book",
-                "title": book_tip.title,
-                "author": book_tip.author,
+                "title": book_title,
+                "author": book_author,
+                "username": username
+            })
+            database.session.commit()
+            return True
+        except IntegrityError as error:
+            # UNIQUE constraint fail
+            assert isinstance(error.orig, UniqueViolation)
+            database.session.rollback()
+            return False
+
+    def remove_like(self, book_title: str, book_author: str, username: str) -> bool:
+        sql = """DELETE FROM likes
+                 WHERE type = :type AND title = :title AND author = :author AND username = :username"""
+        try:
+            database.session.execute(sql, {
+                "type": "Book",
+                "title": book_title,
+                "author": book_author,
                 "username": username
             })
             database.session.commit()

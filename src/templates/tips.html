@@ -30,8 +30,28 @@
                 <td>Luontiaika:</td>
                 <td>{{tip.timestamp.strftime("%H:%M %d.%m.%Y") }}</td>
             </tr>
+            <tr>
+                <td>Tykkäykset:</td>
+                <td>{{ tip.likes|length }}</td>
+            </tr>
         </tbody>
     </table>
+    {% endif %}
+
+    {% if session.username %}
+    {% if session.username in tip.likes %}
+    <form method="POST" action="/dislike">
+        <input type="hidden" name="title" value="{{tip.title}}" />
+        <input type="hidden" name="author" value="{{tip.author}}" />
+        <input type="submit" value="En tykkää" />
+    </form>
+    {% else %}
+    <form method="POST" action="/like">
+        <input type="hidden" name="title" value="{{tip.title}}" />
+        <input type="hidden" name="author" value="{{tip.author}}" />
+        <input type="submit" value="Tykkää" />
+    </form>
+    {% endif %}
     {% endif %}
 
     {% if tip.adder_username == session.username %}
