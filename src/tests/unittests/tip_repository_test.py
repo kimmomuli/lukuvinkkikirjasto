@@ -52,3 +52,13 @@ class TestTipRepository(unittest.TestCase):
         tip_repository.delete_tip(self.book_tip2)
         tips = tip_repository.get_all_book_tips()
         self.assertCountEqual(tips, [self.book_tip1])
+
+    def test_like_can_be_added_to_tip(self):
+        gulag = BookTip("Gulag vankileirien saaristo",
+                        "Alexander Solzenitsyn", 1968, "Trotsky")
+
+        tip_repository.add_book_tip(gulag)
+
+        tip_repository.add_like(gulag, "JStalin")
+        tips = tip_repository.get_all_book_tips()
+        self.assertEqual(tips[0].likes[0], "JStalin")

@@ -1,9 +1,9 @@
-from typing import Optional
+from typing import Optional, List
 
 
 class BookTip:
     def __init__(self, title: str, author: str, year: int,
-                 adder_username: str, timestamp: Optional[str] = None, likes=[]) -> None:
+                 adder_username: str, timestamp: Optional[str] = None, likes: Optional[List[str]] = None) -> None:
         self.title = title
         self.author = author
         self.year = year

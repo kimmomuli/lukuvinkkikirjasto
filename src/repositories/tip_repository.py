@@ -22,16 +22,20 @@ class TipRepository:
 
         return book_tips
 
-    def get_tip_likes(self, type: str, title: str, author: str) -> List[str]:
+    def get_tip_likes(self, tip_type: str, title: str, author: str) -> List[str]:
         sql = "SELECT username FROM likes WHERE type = :type AND title = :title AND author = :author"
 
-        return database.session.execute(sql,
-                                        {
-                                            "type": type,
-                                            "title": title,
-                                            "author": author
-                                        }
-                                        ).fetchall()
+        result = database.session.execute(sql,
+                                          {
+                                              "type": tip_type,
+                                              "title": title,
+                                              "author": author
+                                          }
+                                          ).fetchall()
+        all_likes = []
+        for item in result:
+            all_likes.append(item["username"])
+        return all_likes
 
     def add_book_tip(self, book_tip: BookTip) -> bool:
         try:
@@ -67,25 +71,30 @@ class TipRepository:
             database.session.rollback()
             return False
 
-    def add_like(self, book_tip: BookTip, username: str) -> bool:
-        sql = "INSERT INTO likes (type,title,author,username) VALUES (:type,:title,:author,:username)"
-        try:
-            database.session.execute(sql, {
-                "type": "Book",
-                "title": book_tip.title,
-                "author": book_tip.author,
-                "username": username
-            })
-            database.session.commit()
-            return True
-        except IntegrityError as error:
-            # UNIQUE constraint fail
-            assert isinstance(error.orig, UniqueViolation)
-            database.session.rollback()
-            return False
+    def add_like(self, tip: BookTip, username: str) -> None:
+
+        sql = """INSERT INTO likes VALUES (:type, :title, :author, :username)"""
+        database.session.execute(sql,
+                                 {
+                                     "type": 'Book',
+                                     "title": tip.title,
+                                     "author": tip.author,
+                                     "username": username
+                                 })
+        database.session.commit()
+
+    def delete_tip_like(self, tip: BookTip, username: str) -> None:
+        sql = "DELETE FROM likes WHERE type = :type AND title = :title AND author = :author AND username = :username"
+
+        database.session.execute(sql, {
+            "type": tip.type,
+            "title": tip.title,
+            "author": tip.author,
+            "username": username
+        })
 
     def delete_all(self) -> None:
-        sql = "DELETE FROM tips; DELETE FROM book_tips"
+        sql = "DELETE FROM tips; DELETE FROM book_tips; DELETE FROM likes"
         database.session.execute(sql)
         database.session.commit()
 
