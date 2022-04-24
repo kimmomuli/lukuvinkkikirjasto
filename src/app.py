@@ -4,7 +4,7 @@ from flask import Flask
 from flask import session  # pylint: disable=unused-import
 from config import DATABASE_URL, ENV
 from database import database
-from views import login, new_tip, register, tips, tests
+from views import login, new_tip, register, tips, tests, like
 
 
 def create_app():
@@ -19,6 +19,7 @@ def create_app():
     app.register_blueprint(new_tip.new_tip_bp)
     app.register_blueprint(login.login_bp)
     app.register_blueprint(register.register_bp)
+    app.register_blueprint(like.like_bp)
     if ENV == "testing":
         logging.getLogger('werkzeug').setLevel(logging.ERROR)
         app.register_blueprint(tests.tests_bp)

@@ -25,6 +25,7 @@ class TipRepository:
     def get_tip_likes(self, tip_type: str, title: str, author: str) -> List[str]:
         sql = "SELECT username FROM likes WHERE type = :type AND title = :title AND author = :author"
 
+<<<<<<< HEAD
         result = database.session.execute(sql,
                                           {
                                               "type": tip_type,
@@ -36,6 +37,16 @@ class TipRepository:
         for item in result:
             all_likes.append(item["username"])
         return all_likes
+=======
+        likes = database.session.execute(sql,
+                                         {
+                                             "type": type,
+                                             "title": title,
+                                             "author": author
+                                         }
+                                         ).fetchall()
+        return likes[0] if len(likes) > 0 else []
+>>>>>>> 25debc4183c2e90bb53629754c90af3a5c1e70ce
 
     def add_book_tip(self, book_tip: BookTip) -> bool:
         try:
@@ -71,6 +82,7 @@ class TipRepository:
             database.session.rollback()
             return False
 
+<<<<<<< HEAD
     def add_like(self, tip: BookTip, username: str) -> None:
 
         sql = """INSERT INTO likes VALUES (:type, :title, :author, :username)"""
@@ -92,6 +104,42 @@ class TipRepository:
             "author": tip.author,
             "username": username
         })
+=======
+    def add_like(self, book_title: str, book_author: str, username: str) -> bool:
+        sql = "INSERT INTO likes (type,title,author,username) VALUES (:type,:title,:author,:username)"
+        try:
+            database.session.execute(sql, {
+                "type": "Book",
+                "title": book_title,
+                "author": book_author,
+                "username": username
+            })
+            database.session.commit()
+            return True
+        except IntegrityError as error:
+            # UNIQUE constraint fail
+            assert isinstance(error.orig, UniqueViolation)
+            database.session.rollback()
+            return False
+
+    def remove_like(self, book_title: str, book_author: str, username: str) -> bool:
+        sql = """DELETE FROM likes
+                 WHERE type = :type AND title = :title AND author = :author AND username = :username"""
+        try:
+            database.session.execute(sql, {
+                "type": "Book",
+                "title": book_title,
+                "author": book_author,
+                "username": username
+            })
+            database.session.commit()
+            return True
+        except IntegrityError as error:
+            # UNIQUE constraint fail
+            assert isinstance(error.orig, UniqueViolation)
+            database.session.rollback()
+            return False
+>>>>>>> 25debc4183c2e90bb53629754c90af3a5c1e70ce
 
     def delete_all(self) -> None:
         sql = "DELETE FROM tips; DELETE FROM book_tips; DELETE FROM likes"
