@@ -2,7 +2,7 @@
 {% block title %}Luo lukuvinkki{% endblock %}
 {% block content %}
 
-<h1>Luo lukuvinkki</h1>
+<div class="new_tip_header">Luo lukuvinkki</div>
 
 <form method="POST">
     <p>
@@ -17,7 +17,7 @@
         Kirjoitusvuosi: <br />
         <input type="number" name="year" value="{{year}}" placeholder="Kirjoitusvuosi" />
     </p>
-    <input type="submit" value="luo vinkki" />
+    <input type="submit" class="btn btn-dark" value="Luo vinkki" />
 </form>
 
 {% endblock %}
