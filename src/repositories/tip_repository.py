@@ -71,14 +71,14 @@ class TipRepository:
             database.session.rollback()
             return False
 
-    def add_like(self, tip: BookTip, username: str) -> None:
+    def add_like(self, title: str, author: str, username: str) -> None:
 
         sql = """INSERT INTO likes VALUES (:type, :title, :author, :username)"""
         database.session.execute(sql,
                                  {
                                      "type": 'Book',
-                                     "title": tip.title,
-                                     "author": tip.author,
+                                     "title": title,
+                                     "author": author,
                                      "username": username
                                  })
         database.session.commit()

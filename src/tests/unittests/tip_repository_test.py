@@ -59,6 +59,29 @@ class TestTipRepository(unittest.TestCase):
 
         tip_repository.add_book_tip(gulag)
 
-        tip_repository.add_like(gulag, "JStalin")
+        tip_repository.add_like(gulag.title, gulag.author, "JStalin")
         tips = tip_repository.get_all_book_tips()
         self.assertEqual(tips[0].likes[0], "JStalin")
+
+    def test_two_users_can_like_same_book(self):
+        gulag = BookTip("Gulag vankileirien saaristo",
+                        "Alexander Solzenitsyn", 1968, "Trotsky")
+
+        tip_repository.add_book_tip(gulag)
+
+        tip_repository.add_like(gulag.title, gulag.author, "JStalin")
+        tip_repository.add_like(gulag.title, gulag.author, "ILenin")
+        tips = tip_repository.get_all_book_tips()
+        self.assertEqual(tips[0].likes, ["ILenin", "JStalin"])
+
+    def test_user_can_dislike_liked_booktip(self):
+        anna = BookTip("Anna Karenina",
+                       "Leo Tolstoi", 1878, "LTrotsky")
+
+        tip_repository.add_book_tip(anna)
+
+        tip_repository.add_like(anna.title, anna.author, "JStalin")
+        tip_repository.add_like(anna.title, anna.author, "ILenin")
+        tip_repository.remove_like(anna.title, anna.author, "JStalin")
+        tips = tip_repository.get_all_book_tips()
+        self.assertEqual(tips[0].likes[0], "ILenin")
