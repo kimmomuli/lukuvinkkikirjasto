@@ -2,7 +2,7 @@
 {% block title %}Rekisteröidy{% endblock %}
 {% block content %}
 
-<h1>Rekisteröidy</h1>
+<div class="register_header">Rekisteröidy</div>
 
 <form method="POST">
     <p>
@@ -13,7 +13,7 @@
         Salasana <br />
         <input type="password" name="password" placeholder="Salasana" />
     </p>
-    <input type="submit" value="Rekisteröidy" />
+    <input type="submit" class="btn btn-dark" value="Rekisteröidy" />
 </form>
 
 {% endblock %}

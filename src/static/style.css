@@ -1,0 +1,16 @@
+.notifications {
+    font-size: 15px;;
+}
+.header {
+    font-size: 40px;
+}
+
+.login_header, .register_header, .new_tip_header {
+    font-size: 35px;
+}
+.tip {
+    margin-bottom: 2px;
+}
+.form-control {
+    padding: 2px;
+}
