@@ -20,7 +20,7 @@ class TestTipRepository(unittest.TestCase):
         self._add_book_tip(self.book_tip1)
 
         tips = tip_repository.get_all_tips()
-        self.assertEqual(tips[0], self.book_tip1)
+        self.assertCountEqual(tips, [self.book_tip1])
 
     def test_adding_multiple_book_tips(self):
         self._add_book_tip(self.book_tip1)
@@ -36,13 +36,15 @@ class TestTipRepository(unittest.TestCase):
     def test_the_sorting_tips(self):
         self._add_book_tip(self.book_tip1)
         self._add_book_tip(self.book_tip2)
-        tip_repository.add_like(self.book_tip1.id, "testusername")
+        tip_repository.add_like(self.book_tip1.id, "JStalin")
+
+        self.book_tip1.likes.append("JStalin")
 
         tips = tip_repository.get_all_tips()
-        self.assertEqual(tips[0].title, self.book_tip1.title)
+        self.assertEqual(tips[0], self.book_tip1)
 
         tips = tip_repository.get_all_tips(order="time")
-        self.assertEqual(tips[0].title, self.book_tip2.title)
+        self.assertEqual(tips[0], self.book_tip2)
 
     def test_two_users_can_add_the_same_book_tip(self):
         book_tip1 = BookTip(1, "title", "author", 1880, "username1")
@@ -72,16 +74,31 @@ class TestTipRepository(unittest.TestCase):
         self._add_book_tip(self.book_tip1)
         tip_repository.add_like(self.book_tip1.id, "JStalin")
 
+        self.book_tip1.likes.append("JStalin")
         tips = tip_repository.get_all_tips()
-        self.assertCountEqual(tips[0].likes, ["JStalin"])
+        self.assertCountEqual(tips, [self.book_tip1])
+
+    def test_same_user_cannot_like_same_tip_twice(self):
+        self._add_book_tip(self.book_tip1)
+
+        result = tip_repository.add_like(self.book_tip1.id, "JStalin")
+        self.assertTrue(result)
+        result = tip_repository.add_like(self.book_tip1.id, "JStalin")
+        self.assertFalse(result)
+
+        self.book_tip1.likes.append("JStalin")
+        tips = tip_repository.get_all_tips()
+        self.assertCountEqual(tips, [self.book_tip1])
 
     def test_two_users_can_like_same_book(self):
         self._add_book_tip(self.book_tip1)
-
         tip_repository.add_like(self.book_tip1.id, "JStalin")
         tip_repository.add_like(self.book_tip1.id, "ILenin")
+
+        self.book_tip1.likes.append("JStalin")
+        self.book_tip1.likes.append("ILenin")
         tips = tip_repository.get_all_tips()
-        self.assertCountEqual(tips[0].likes, ["ILenin", "JStalin"])
+        self.assertCountEqual(tips, [self.book_tip1])
 
     def test_user_can_remove_like(self):
         self._add_book_tip(self.book_tip1)
@@ -90,5 +107,6 @@ class TestTipRepository(unittest.TestCase):
         tip_repository.add_like(self.book_tip1.id, "ILenin")
         tip_repository.remove_like(self.book_tip1.id, "JStalin")
 
+        self.book_tip1.likes.append("ILenin")
         tips = tip_repository.get_all_tips()
-        self.assertCountEqual(tips[0].likes, ["ILenin"])
+        self.assertCountEqual(tips, [self.book_tip1])
