@@ -6,6 +6,23 @@ Test Setup  Reset Database, Create User, Log In, Add Book Tip And Go To Home Pag
 
 
 *** Test Cases ***
+Like Self Added Tip
+    Page Should Contain Book Tip  Sinuhe egyptiläinen  Mika Waltari  1945  robot
+    Click Button  Tykkää
+    Page Should Not Contain Button  Tykkää
+
+Dislike Self Added Tip
+    Like Tip
+    Click Button  En tykkää
+    Page Should Not Contain Button  En tykkää
+
+Like Other Users Tip
+    Log Out
+    Create User And Log In  third_robot  third_robot123
+    Page Should Contain Button  Tykkää
+    Click Button  Tykkää
+    Page Should Not Contain Button  Tykkää
+
 Delete Self Added Tip
     Page Should Contain Book Tip  Sinuhe egyptiläinen  Mika Waltari  1945  robot
     Click Button  Poista
@@ -19,10 +36,12 @@ There Is No Delete Button On A Tip Added By Another User
     Page Should Contain Book Tip  Sinuhe egyptiläinen  Mika Waltari  1945  robot
     Page Should Not Contain Button  Poista
 
-
 *** Keywords ***
 Log Out
     Click Link  Kirjaudu ulos
+
+Like Tip
+    Click Button  Tykkää
 
 Reset Database, Create User, Log In, Add Book Tip And Go To Home Page
     Reset Application And Delete Cookies
