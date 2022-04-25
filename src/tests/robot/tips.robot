@@ -9,19 +9,26 @@ Test Setup  Reset Database, Create User, Log In, Add Book Tip And Go To Home Pag
 Like Self Added Tip
     Page Should Contain Book Tip  Sinuhe egyptiläinen  Mika Waltari  1945  robot
     Click Button  Tykkää
-    Page Should Not Contain Button  Tykkää
+    Page Should Contain Likes  1
 
 Dislike Self Added Tip
     Like Tip
     Click Button  En tykkää
-    Page Should Not Contain Button  En tykkää
+    Page Should Contain Likes  0
 
 Like Other Users Tip
+    Click Button  Tykkää
     Log Out
     Create User And Log In  third_robot  third_robot123
     Page Should Contain Button  Tykkää
     Click Button  Tykkää
+    Page Should Contain Likes  2
+
+There Is No Like Button If Not Logged In
+    Log Out
+    Go To Home Page
     Page Should Not Contain Button  Tykkää
+    Page Should Not Contain Button  En tykkää
 
 Delete Self Added Tip
     Page Should Contain Book Tip  Sinuhe egyptiläinen  Mika Waltari  1945  robot

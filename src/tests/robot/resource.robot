@@ -55,6 +55,10 @@ Page Should Contain Book Tip
     Page Should Contain  ${year}
     Page Should Contain  ${adder_username}
 
+Page Should Contain Likes
+    [Arguments]  ${likes}
+    Page Should Contain  ${likes}
+
 Create User And Log In
     [Arguments]  ${username}  ${password}
     Create User  ${username}  ${password}
