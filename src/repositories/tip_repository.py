@@ -71,17 +71,22 @@ class TipRepository:
             database.session.rollback()
             return False
 
-    def add_like(self, title: str, author: str, username: str) -> None:
-
-        sql = """INSERT INTO likes VALUES (:type, :title, :author, :username)"""
-        database.session.execute(sql,
-                                 {
-                                     "type": 'Book',
-                                     "title": title,
-                                     "author": author,
-                                     "username": username
-                                 })
-        database.session.commit()
+    def add_like(self, title: str, author: str, username: str) -> bool:
+        try:
+            sql = """INSERT INTO likes VALUES (:type, :title, :author, :username)"""
+            database.session.execute(sql, {
+                "type": 'Book',
+                "title": title,
+                "author": author,
+                "username": username
+            })
+            database.session.commit()
+            return True
+        except IntegrityError as error:
+            # UNIQUE constraint fail
+            assert isinstance(error.orig, UniqueViolation)
+            database.session.rollback()
+            return False
 
     def remove_like(self, title: str, author: str, username: str) -> bool:
         sql = "DELETE FROM likes WHERE type = :type AND title = :title AND author = :author AND username = :username"
@@ -93,7 +98,7 @@ class TipRepository:
             "username": username
         })
         database.session.commit()
-        # change to check if succesfull. now will always return true.
+        # I'm pretty sure this cannot fail so just return True :D.
         return True
 
     def delete_all(self) -> None:
