@@ -7,11 +7,14 @@ from entities.book_tip import BookTip
 
 
 class TipRepository:
-    def get_all_tips(self) -> List[BookTip]:
+    def get_all_tips(self, order: str = "likes") -> List[BookTip]:
         sql = """SELECT t.id, t.type, t.title, t.author, t.timestamp, t.adder_username
                  FROM tips t LEFT JOIN likes l ON l.tip_id = t.id
-                 GROUP BY t.id
-                 ORDER BY COUNT(l.username) DESC, t.timestamp DESC"""
+                 GROUP BY t.id"""
+        if order == "time":
+            sql += " ORDER BY t.timestamp DESC, COUNT(l.username) DESC"
+        else:
+            sql += " ORDER BY COUNT(l.username) DESC, t.timestamp DESC"
 
         result = database.session.execute(sql)
         tips = []

@@ -33,13 +33,16 @@ class TestTipRepository(unittest.TestCase):
         self._add_book_tip(self.book_tip1)
         self._add_book_tip(self.book_tip1, False)
 
-    def test_the_most_liked_tip_is_first(self):
+    def test_the_sorting_tips(self):
         self._add_book_tip(self.book_tip1)
         self._add_book_tip(self.book_tip2)
-
         tip_repository.add_like(self.book_tip1.id, "testusername")
+
         tips = tip_repository.get_all_tips()
         self.assertEqual(tips[0].title, self.book_tip1.title)
+
+        tips = tip_repository.get_all_tips(order="time")
+        self.assertEqual(tips[0].title, self.book_tip2.title)
 
     def test_two_users_can_add_the_same_book_tip(self):
         book_tip1 = BookTip(1, "title", "author", 1880, "username1")
