@@ -72,7 +72,7 @@ Set Year
     Input Text  year  ${kirjoitusvuosi}
 
 Submit Book Tip
-    Click Button  luo vinkki
+    Click Button  Luo vinkki
 
 Reset Database, Create User, Log In And Go To New Tip Page
     Reset Application And Delete Cookies

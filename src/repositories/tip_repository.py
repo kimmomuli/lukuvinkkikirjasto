@@ -92,6 +92,7 @@ class TipRepository:
             "author": author,
             "username": username
         })
+        database.session.commit()
         # change to check if succesfull. now will always return true.
         return True
 
