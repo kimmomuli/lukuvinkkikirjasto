@@ -7,47 +7,78 @@ from entities.book_tip import BookTip
 
 
 class TipRepository:
-    def get_all_book_tips(self) -> List[BookTip]:
-        sql = """SELECT bt.title, bt.author, bt.year, t.timestamp, t.adder_username
-                 FROM book_tips bt INNER JOIN tips t ON bt.title = t.title AND bt.author = t.author
-                 ORDER BY timestamp DESC"""
+    def get_all_tips(self) -> List[BookTip]:
+        sql = """SELECT t.id, t.type, t.title, t.author, t.timestamp, t.adder_username
+                 FROM tips t LEFT JOIN likes l ON l.tip_id = t.id
+                 GROUP BY t.id
+                 ORDER BY COUNT(l.username) DESC, t.timestamp DESC"""
+
         result = database.session.execute(sql)
-        tips = result.fetchall()
-        book_tips = []
-        for tip in tips:
-            book_tips.append(BookTip(
-                tip["title"], tip["author"], tip["year"], tip["adder_username"], tip["timestamp"], self.get_tip_likes(
-                    "Book", tip["title"], tip["author"])
-            ))
+        tips = []
+        for tip in result.fetchall():
+            if tip["type"] == "book":
+                tips.append(self.get_book_tip(
+                    tip["id"],
+                    tip["title"],
+                    tip["author"],
+                    tip["adder_username"],
+                    tip["timestamp"],
+                    self.get_tip_likes(tip["id"])
+                ))
 
-        return book_tips
+        return tips
 
-    def get_tip_likes(self, tip_type: str, title: str, author: str) -> List[str]:
-        sql = "SELECT username FROM likes WHERE type = :type AND title = :title AND author = :author"
+    def get_book_tip(self, tip_id: int, title: str, author: str, adder_username: str, timestamp: datetime, likes: List[str]) -> BookTip:
+        sql = """SELECT title, author, year
+                 FROM book_tips
+                 WHERE title = :title AND author = :author"""
+        book_tip = database.session.execute(sql, {
+            "title": title,
+            "author": author
+        }).fetchone()
 
-        result = database.session.execute(sql,
-                                          {
-                                              "type": tip_type,
-                                              "title": title,
-                                              "author": author
-                                          }
-                                          ).fetchall()
+        return BookTip(
+            tip_id,
+            book_tip["title"],
+            book_tip["author"],
+            book_tip["year"],
+            adder_username,
+            timestamp,
+            likes
+        )
+
+    def get_tip_likes(self, tip_id: int) -> List[str]:
+        sql = "SELECT username FROM likes WHERE tip_id = :tip_id"
+
+        result = database.session.execute(sql, {"tip_id": tip_id}).fetchall()
         all_likes = []
         for item in result:
             all_likes.append(item["username"])
         return all_likes
 
-    def add_book_tip(self, book_tip: BookTip) -> bool:
+    def get_tip_id(self, tip: BookTip) -> int:
+        sql = """SELECT id
+                 FROM tips
+                 WHERE type = :type AND title = :title AND author = :author AND adder_username = :adder_username"""
+        result = database.session.execute(sql, {
+            "type": tip.type,
+            "title": tip.title,
+            "author": tip.author,
+            "adder_username": tip.adder_username
+        }).fetchone()
+        return int(result["id"])
+
+    def add_book_tip(self, title: str, author: str, year: int, adder_username: str) -> bool:
         try:
             sql = """INSERT INTO tips (type, title, author, adder_username, timestamp)
                      VALUES (:type, :title, :author, :adder_username, :timestamp)"""
             database.session.execute(
                 sql,
                 {
-                    "type": book_tip.type,
-                    "title": book_tip.title,
-                    "author": book_tip.author,
-                    "adder_username": book_tip.adder_username,
+                    "type": "book",
+                    "title": title,
+                    "author": author,
+                    "adder_username": adder_username,
                     "timestamp": datetime.now()
                 }
             )
@@ -55,14 +86,11 @@ class TipRepository:
             sql2 = """INSERT INTO book_tips (title, author, year)
                       VALUES (:title, :author, :year) 
                       ON CONFLICT DO NOTHING"""
-            database.session.execute(
-                sql2,
-                {
-                    "title": book_tip.title,
-                    "author": book_tip.author,
-                    "year": book_tip.year
-                }
-            )
+            database.session.execute(sql2, {
+                "title": title,
+                "author": author,
+                "year": year
+            })
             database.session.commit()
             return True
         except IntegrityError as error:
@@ -71,13 +99,11 @@ class TipRepository:
             database.session.rollback()
             return False
 
-    def add_like(self, title: str, author: str, username: str) -> bool:
+    def add_like(self, tip_id: int, username: str) -> bool:
         try:
-            sql = """INSERT INTO likes VALUES (:type, :title, :author, :username)"""
+            sql = """INSERT INTO likes VALUES (:tip_id, :username)"""
             database.session.execute(sql, {
-                "type": 'Book',
-                "title": title,
-                "author": author,
+                "tip_id": tip_id,
                 "username": username
             })
             database.session.commit()
@@ -88,13 +114,11 @@ class TipRepository:
             database.session.rollback()
             return False
 
-    def remove_like(self, title: str, author: str, username: str) -> bool:
-        sql = "DELETE FROM likes WHERE type = :type AND title = :title AND author = :author AND username = :username"
+    def remove_like(self, tip_id: int, username: str) -> bool:
+        sql = "DELETE FROM likes WHERE tip_id = :tip_id AND username = :username"
 
         database.session.execute(sql, {
-            "type": 'Book',
-            "title": title,
-            "author": author,
+            "tip_id": tip_id,
             "username": username
         })
         database.session.commit()
@@ -102,7 +126,7 @@ class TipRepository:
         return True
 
     def delete_all(self) -> None:
-        sql = "DELETE FROM tips; DELETE FROM book_tips; DELETE FROM likes"
+        sql = "DELETE FROM likes; DELETE FROM tips; DELETE FROM book_tips"
         database.session.execute(sql)
         database.session.commit()
 

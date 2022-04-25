@@ -1,4 +1,3 @@
-from entities.book_tip import BookTip
 from repositories.tip_repository import TipRepository
 from repositories.tip_repository import tip_repository as default_tip_repository
 
@@ -15,10 +14,10 @@ class BookTipService:
         if not str.isdigit(year) or not 1 <= int(year) <= 2025:
             return "Kirjoitusvuoden pitää olla kokonaisluku väliltä 1-2025"
 
-        book_tip = BookTip(title, author, year, adder_username)
-        result = self._tip_repositorio.add_book_tip(book_tip)
+        result = self._tip_repositorio.add_book_tip(
+            title, author, year, adder_username)
         if not result:
-            return "Olet jo lisännyt kirjavinkin samalla otsikolla"
+            return "Olet jo lisännyt kirjavinkin samalla otsikolla ja kirjailijalla"
         return ""
 
 

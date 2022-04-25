@@ -2,8 +2,9 @@ from typing import Optional, List
 
 
 class BookTip:
-    def __init__(self, title: str, author: str, year: int,
+    def __init__(self, tip_id: int, title: str, author: str, year: int,  # pylint: disable=too-many-arguments
                  adder_username: str, timestamp: Optional[str] = None, likes: Optional[List[str]] = None) -> None:
+        self.id = tip_id
         self.title = title
         self.author = author
         self.year = year

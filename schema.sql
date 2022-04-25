@@ -4,12 +4,13 @@ CREATE TABLE users (
     password TEXT
 );
 CREATE TABLE tips (
+    id SERIAL PRIMARY KEY,
     type TEXT,
     title TEXT,
     author TEXT,
     adder_username TEXT,
     timestamp TIMESTAMP,
-    PRIMARY KEY (type, title, adder_username)
+    UNIQUE (type, title, author, adder_username)
 );
 CREATE TABLE book_tips (
     title TEXT,
@@ -18,9 +19,7 @@ CREATE TABLE book_tips (
     PRIMARY KEY (title, author)
 );
 CREATE TABLE likes (
-    type TEXT,
-    title TEXT,
-    author TEXT,
+    tip_id INT REFERENCES tips,
     username TEXT,
-    PRIMARY KEY(type,title,author,username)
+    PRIMARY KEY(tip_id, username)
 );

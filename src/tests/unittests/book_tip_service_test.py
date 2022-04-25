@@ -1,5 +1,4 @@
 import unittest
-from entities.book_tip import BookTip
 from services.book_tip_service import BookTipService
 
 
@@ -7,11 +6,11 @@ class StubTipRepository:
     def __init__(self):
         self.tips = []
 
-    def add_book_tip(self, book_tip: BookTip) -> bool:
+    def add_book_tip(self, title: str, author: str, _: int, adder_username: str) -> bool:
         for tip in self.tips:
-            if tip == (book_tip.title, book_tip.adder_username):
+            if tip == (title, author, adder_username):
                 return False
-        self.tips.append((book_tip.title, book_tip.adder_username))
+        self.tips.append((title, author, adder_username))
         return True
 
 
@@ -82,4 +81,4 @@ class TestBookTipService(unittest.TestCase):
         error = self.book_tip_service.add_book_tip(
             "title", "author", "2025", "username")
         self.assertEqual(
-            error, "Olet jo lisännyt kirjavinkin samalla otsikolla")
+            error, "Olet jo lisännyt kirjavinkin samalla otsikolla ja kirjailijalla")
