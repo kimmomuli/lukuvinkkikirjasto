@@ -4,6 +4,16 @@
 
 <div class="header">Lukuvinkit</div>
 
+<div class="dropdown">
+    <button class="btn btn-success dropdown-toggle" type="button" id="menubutton" data-bs-toggle="dropdown" aria-haspopup="true" >
+      Järjestä vinkit
+    </button>
+    <div class="dropdown-menu" aria-labelledby="menubutton">
+      <a class="dropdown-item" href="#">Aikaleiman mukaan</a>
+      <a class="dropdown-item" href="#">Tykkäyksien mukaan</a>
+    </div>
+</div>
+
 {% for tip in tips %}
 <hr />
 <div>
