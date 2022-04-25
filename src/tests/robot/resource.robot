@@ -6,7 +6,7 @@ Library  ./AppLibrary.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
-${DELAY}  0 seconds
+${DELAY}  %{DELAY=0} seconds
 ${HOME URL}  http://${SERVER}
 ${NEW_TIP_URL}  http://${SERVER}/new_tip
 ${REGISTER_URL}  http://${SERVER}/register

@@ -48,6 +48,7 @@ jobs:
           DATABASE_URL: 'postgresql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
           SECRET_KEY: 'SECRET_KEY'
           ENV: 'testing'
+          DELAY: 0.1
       - name: pylint
         run: poetry run pylint src
       - name: Coverage report
