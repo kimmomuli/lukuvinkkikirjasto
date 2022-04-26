@@ -21,7 +21,7 @@
     <h4>{{tip.title}}</h4>
 
     {% if tip.type == "book" %}
-    <table>
+    <table id="tip_{{loop.index0}}">
         <tbody>
             <tr>
                 <td>Kirjailija:</td>
