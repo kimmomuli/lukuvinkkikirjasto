@@ -69,3 +69,5 @@ $ poetry run invoke lint
 ## DoD
 ![Definition of done](https://github.com/kimmomuli/Lukuvinkkikirjasto/blob/main/dokumentaatio/definiton_of_done.md)
 
+
+
