@@ -18,5 +18,5 @@ def dislike():
     tip_id = request.form["tip_id"]
     if tip_repository.remove_like(tip_id, session["username"]):
         return redirect("/")
-    flash("Tykkäämisen poisto epäonnistui", "error")
+    flash("Tykkäämisen poistaminen epäonnistui", "error")
     return redirect("/")
