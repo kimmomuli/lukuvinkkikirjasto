@@ -26,6 +26,11 @@ Kolmannessa sprintissä tein pääasiassa nettisivujen ulkonäköä, en olljut e
 Kokonaisuutena sanoisin että projekti oli onnistunut ja opin paljon, varsinkin Scrum työskentelystä joka oli itselle ennen tätä kurssityötä tuttu vain teoreettisenä käsitteenä. Tiimi oli mielestäni joustava ja hyvin avulias toisiaan kohtaan. Henkilökohtaisesti olisin toivonut itseltäni parempaa aikataulutusta kurssin työnteon kanssa, johon kiinnitän huomiota ensi kerralla. Tiimityöskentelyä voisi helpottaa myös selkeämpi työjako, nyt pariin otteeseen meinattiin koodata samaa asiaa kahdesti. Etätyöskentely toi itselleni haasteita ja seuraavaan projektiin lähitapaamiset olisivatkin mukava lisä, tämä auttaisi kommunikaatiota. Paljon tuli opittua ja projekti valmistui vaikkei ehkä ihan siihen laajuuteen päästy mitä alussa suunniteltiin.
 
 ## Juho
+Ensimmäisessä sprintissä meni aikaa siihen että saatiin kaikenlaiset testit ja CI toimimaan. Paljon aikaa kului myös siihen että piti tutkia kuinka yksikkötestit saadaan toimimaan flask-sqlalchemyn kanssa, mutta referenssiprojektista sai hyvin mallia.
+Toisessa sprintissä oli hieman ongelmia sen kanssa miten blueprintit saadaan toimimaan session kanssa.
+Kolmannessa sprintissä melkein kaikki työskentely jäi viimmeisille päiville.
+
+Tiimissä työskentely toimi hyvin, ihmiset uskalsivat kysyä apua Telegramissa ja siellä myös sitten autettiin. Miniprojektin aikana opin minkälaista on ryhmässä työskentely ja miten GitHub projecs -sivua käytetään. Ensi projektissa pitäisi melkeimpä heti alussa luoda projektin runko, sopia yhteisistä käytänteistä ja säätää automaattiset testit sekä CI toimimaan, jotta jatkokehitys olisi sujuvampaa.
 
 ## Tuomo
 Ensimmäisen sprintin aikana saimme arkitehtuurin kasaan ja perustoiminnallisuuden. Se olisi varmasti mennyt selvästi kivuttomammin, jos jonkinlainen pre-planning / 0 sprint olisi tullut tehtyä ensin. Oma python osaaminen oli tässä vähän tiukoilla, mutta tarvittaessa tuli tiimiltä apua. Hoidin aluksi kannan rakentamisen ja vinkkien tallentamiseen ja lataamiseen tarvittavat toiminnallisuudet.
