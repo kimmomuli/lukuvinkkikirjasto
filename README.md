@@ -5,6 +5,9 @@
 
 [Linkki sovellukseen](https://lukuvinkkikirjasto2.herokuapp.com/)
 
+## Loppuraportti
+[Loppuraportti](https://github.com/kimmomuli/Lukuvinkkikirjasto/blob/main/dokumentaatio/Loppuraportti.md)
+
 ## Ohjelman ajaminen
 #### Ohjelman alustaminen
 1. Luo `.env` tiedosto projektin juureen ja lisää seuraavat rivit sinne
