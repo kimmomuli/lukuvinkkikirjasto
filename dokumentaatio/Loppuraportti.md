@@ -49,4 +49,4 @@ Mielestäni projekti onnistui hyvin.
 Vielä paremmin projekti menisi, jos pidetääisiin plannin sprint alussa ja tehtäisiin työtä samasta lokaatiosta. 
 
 # Yhteenveto
-Yhteenvetona saimme tehtyä toimivan hyvän ja toimivan sovelluksen. Tiimissä työskentely toimi hyvin. Opimme kaikki tiimityöskentelystä ohjelmistotuotantoprojektissa. Käytänteiden puuttuminen ja aikataulujen suunnitellu oli projektin suurimmat kehitykohteet. Kaikista ongelmista selvittiin, missä auttoi aktiivinen keskustelu Telegrammissa. 
+Yhteenvetona saimme tehtyä hyvän ja toimivan sovelluksen. Tiimissä työskentely toimi hyvin. Opimme kaikki tiimityöskentelystä ohjelmistotuotantoprojektissa. Käytänteiden puuttuminen ja aikataulujen suunnitellu oli projektin suurimmat kehitykohteet. Kaikista ongelmista selvittiin, missä auttoi aktiivinen keskustelu Telegrammissa. 
