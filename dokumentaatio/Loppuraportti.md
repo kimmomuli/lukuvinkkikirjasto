@@ -6,6 +6,13 @@ Tämä raportti kuvaa ohjelmistotuotannon kurssin miniprojektin etenemistä maal
 ## Developer Storyt
 
 ## Kimmo
+Ensimmäisessä sprintissä kesti omasta mielestä yllättävän kauan saada toimiva kehitysympäristö. Kun saimme kaikki testit ja CI toimimaan, aloimme saada paremmin tuloksia aikaan. Emme kuitenkaan saaneet kaikkea sovittua valmiiksi, koska edellämainittuihin asioihin kului niin paljon aikaa. Myös yhteiset käytänteet puuttuivat, mikä näkyi myös ensimmäisen sprintin lopputuloksessa.
+
+Toisessa sprintissä oli vaikea löytää yhteisiä aikatauluja. Viestintää käytiin kuitenkin Telegrammissa. Toisessa sprintissä saimme paremmin aikaan asioita, kun kehitysympäristön luontiin ei mennyt enää aikaa. Edelleen yhteiset käytänteet olivat erilaisia, johon tuhlaantui turhan paljon aikaa. Saimme kaiken kuitenkin valmiiksi.
+
+Kolmannessa sprintissä työskentely jäi viimeisille päiville. Oma työskentely jäi vajaaksi, koska aloitin kesätyöt sprintin aikana. Kolmannen sprintin lopputulos oli kuitenkin hyvä.
+
+Lopputulos on kuitenkin hyvä ja saimme toimivan sovelluksen tehtyä. Lisäksi opimme paljon tiimityöskentelystä ohtelmistotuotantoprojektissa. Kehitettävää oli käytänteissä. Ne olisi pitänyt sopia jo ennen ensimmäistä sprinttiä. Nyt saattoi tapahtua niin että sama koodi kirjoitettiin neljään kertaan, koska käytänteet puuttuivat ja muuttuivat. Tiimissä työskentely toimi kuitenkin tosi hyvin ilman suurempia ongelmia. Mielestäni meillä oli siis erinomainen tiimi! Lopputulos oli myös hyvä näin pieneksi projektiksi.
 
 ## Marianna
 Ensimmäisestä sprintistä jäi päällimmäisenä mieleen se, että projektin alustamiseen (etenkin RobobtFramework-testien osalta) kului yllättävän paljon aikaa. Hyväksymistestien teko itsessään jäi myös turhan viime tippaan, jonka takia toinen sprinttiin valituista user storyistä jäi kesken. Tästä keskusteltiinkin heti sprintin jälkeen retrospektiivissä ja sovittiin, että jatkossa kiinnitetään myös näihin testeihin enemmän huomiota.
@@ -41,8 +48,5 @@ Johtuen erilaisista viiikkoaikatauluista työtehtävät jakautuivat aika samanla
 Mielestäni projekti onnistui hyvin.
 Vielä paremmin projekti menisi, jos pidetääisiin plannin sprint alussa ja tehtäisiin työtä samasta lokaatiosta. 
 
-
 # Yhteenveto
-
-Ryhmän jäsenet olivat samaa mieltä
-Lopputulos oli 
+Yhteenvetona saimme tehtyä toimivan hyvän ja toimivan sovelluksen. Tiimissä työskentely toimi hyvin. Opimme kaikki tiimityöskentelystä ohjelmistotuotantoprojektissa. Käytänteiden puuttuminen ja aikataulujen suunnitellu oli projektin suurimmat kehitykohteet. Kaikista ongelmista selvittiin, missä auttoi aktiivinen keskustelu telegrammissa. 
