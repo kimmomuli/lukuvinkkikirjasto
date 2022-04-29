@@ -28,6 +28,14 @@ Kokonaisuutena sanoisin että projekti oli onnistunut ja opin paljon, varsinkin 
 ## Juho
 
 ## Tuomo
+Ensimmäisen sprintin aikana saimme arkitehtuurin kasaan ja perustoiminnallisuuden. Se olisi varmasti mennyt selvästi kivuttomammin, jos jonkinlainen pre-planning / 0 sprint olisi tullut tehtyä ensin. Oma python osaaminen oli tässä vähän tiukoilla, mutta tarvittaessa tuli tiimiltä apua. Hoidin aluksi kannan rakentamisen ja vinkkien tallentamiseen ja lataamiseen tarvittavat toiminnallisuudet.
+Toisessa sprintissä toimintatapa oli selkeentynyt ja pääsimme eteenpäin vähän paremmin. Minä tein käyttäjän kirjautumis ja rekisteröitymistoiminnallisuudet, joita sitten voitiin käyttää sivuilla. 
+Viimeinen sprintti oli minulle selvästi kiireisin ja ehdin juuri ja juuri tehdä tykkäämisrakenteet, jotka tosin menivät uusiksi paremmmin koodaavien toimesta.
+
+Johtuen erilaisista viiikkoaikatauluista työtehtävät jakautuivat aika samanlaisesti jokaisella sprintillä. Minun aikatauluuni sopi parhaiten alkusprintissä työskentely ja siksi rakensin lähinnä palvelujen backendiä ja unit testejä jokaisessa sprintissä.
+Mielestäni projekti onnistui hyvin.
+Vielä paremmin projekti menisi, jos pidetääisiin plannin sprint alussa ja tehtäisiin työtä samasta lokaatiosta. 
+
 
 # Yhteenveto
 
